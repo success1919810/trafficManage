@@ -1,0 +1,14 @@
+{
+  "module": {
+    "pages": [
+      "pages/forgetPassword",
+      "pages/setNewPassword",
+      "pages/starter",
+      "pages/Workbench",
+      "pages/ApprovalManagement",
+      "pages/home",
+      "pages/map",
+      "pages/start"
+    ]
+  }
+}
