@@ -6,6 +6,7 @@
     "pages/start",
     "pages/ApprovalManagement",
     "pages/starter",
-    "pages/errorSubmit"
+    "pages/errorSubmit",
+    "pages/xiaoxigonggao"
   ]
 }
