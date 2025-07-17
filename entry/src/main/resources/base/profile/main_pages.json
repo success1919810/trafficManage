@@ -7,8 +7,8 @@
     "pages/ApprovalManagement",
     "pages/starter",
     "pages/errorSubmit",
-    "pages/xiaoxigonggao",
-    "pages/teqinrenwu",
-    "pages/jingqingrenwu"
+    "pages/qinwu",
+    "pages/shigong",
+    "pages/jicha"
   ]
 }
