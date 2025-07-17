@@ -152,6 +152,14 @@ export struct Workbench {
                 Text('故障上报')
                   .fontSize(14)
               }
+              .onClick(() => {
+                router.pushUrl({
+                  url: 'pages/errorSubmit', // 目标页面的路由地址
+                  params: {
+                    title: '警情任务' // 可选参数，传递给目标页面
+                  }
+                });
+              })
               .width('25%')
             }
             .width('100%')

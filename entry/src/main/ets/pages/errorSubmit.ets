@@ -1,4 +1,5 @@
 import router from '@ohos.router';
+import { Prompt } from '@kit.ArkUI';
 
 @Entry
 @Component
@@ -9,6 +10,8 @@ struct ErrorSubmit {
   bottomRectHeight: number = 0;
   @StorageProp('topRectHeight')
   topRectHeight: number = 0;
+
+
 
 
   build() {
@@ -99,9 +102,18 @@ interface Item1{
 
 @Component
 struct daichuli{
+  @State Refresh:boolean = false;
+  @State Loading:boolean = false;
   datas:Item2[] = [
     {text1:'高点球机 - BH58Z1',text2:'故障类型：未知离线',text3:'设备位置：市中区汉安大道 988 号',text4:'报修时间：2021 年 7 月 1 日 11:08:22',text5:'报修人：刘全'},
     {text1:'普通枪机 - BH3356',text2:'故障类型：未知离线',text3:'设备位置：市中区汉安大道 988 号',text4:'报修时间：2021 年 7 月 1 日 11:08:22',text5:'报修人：刘全'},
+    {text1:'高点球机 - BH58Z1',text2:'故障类型：未知离线',text3:'设备位置：市中区汉安大道 988 号',text4:'报修时间：2021 年 7 月 1 日 11:08:22',text5:'报修人：刘全'},
+    {text1:'高点球机 - BH58Z1',text2:'故障类型：未知离线',text3:'设备位置：市中区汉安大道 988 号',text4:'报修时间：2021 年 7 月 1 日 11:08:22',text5:'报修人：刘全'},
+    {text1:'高点球机 - BH58Z1',text2:'故障类型：未知离线',text3:'设备位置：市中区汉安大道 988 号',text4:'报修时间：2021 年 7 月 1 日 11:08:22',text5:'报修人：刘全'},
+    {text1:'高点球机 - BH58Z1',text2:'故障类型：未知离线',text3:'设备位置：市中区汉安大道 988 号',text4:'报修时间：2021 年 7 月 1 日 11:08:22',text5:'报修人：刘全'},
+    {text1:'高点球机 - BH58Z1',text2:'故障类型：未知离线',text3:'设备位置：市中区汉安大道 988 号',text4:'报修时间：2021 年 7 月 1 日 11:08:22',text5:'报修人：刘全'},
+    {text1:'高点球机 - BH58Z1',text2:'故障类型：未知离线',text3:'设备位置：市中区汉安大道 988 号',text4:'报修时间：2021 年 7 月 1 日 11:08:22',text5:'报修人：刘全'},
+    {text1:'高点球机 - BH58Z1',text2:'故障类型：未知离线',text3:'设备位置：市中区汉安大道 988 号',text4:'报修时间：2021 年 7 月 1 日 11:08:22',text5:'报修人：刘全'},
     {text1:'高点球机 - BH58Z1',text2:'故障类型：未知离线',text3:'设备位置：市中区汉安大道 988 号',text4:'报修时间：2021 年 7 月 1 日 11:08:22',text5:'报修人：刘全'},
   ]
   @Builder
@@ -135,12 +147,52 @@ struct daichuli{
       .borderRadius(15)
 
   }
+
   build() {
     Column(){
-      ForEach(this.datas,(item1:Item1)=>{
-        this.myItemUI(item1)
-      })
-    }.backgroundColor('#f2f2f2')
+      Refresh({refreshing:this.Refresh,promptText:'正在加载中'}){
+
+        List(){
+          //遍历加载图
+          ForEach(this.datas,(item1:Item1)=>{
+            ListItem(){
+              this.myItemUI(item1)
+            }
+          })
+          //下拉刷新
+          if(this.Loading){
+            ListItem(){
+              Row(){
+                Text('松开加载更多')
+                LoadingProgress().width(20).height(20)
+              }
+              .width("100%")
+              .justifyContent(FlexAlign.Center)
+              .padding({top:10})
+            }
+          }
+
+        }
+        .onScrollIndex((start:number,end:number) =>{
+          if(end == this.datas.length-1 && this.Loading == false){
+            this.Loading = true
+            setTimeout(()=>{
+              this.Loading =false
+            },2000)
+          }
+        })
+
+      }
+      .onRefreshing(()=>{
+        this.Refresh = true
+        setTimeout(()=>{
+            this.Refresh = false
+        },2000)
+      })//上拉刷新
+    }
+    .backgroundColor('#f2f2f2')
+    .layoutWeight(1)
+    .padding({bottom:80})
   }
 }
 
@@ -157,6 +209,10 @@ struct chulihzong{
   datas:Item2[] = [
     {text1:'高点球机 - BH58Z1',text2:'故障类型：未知离线',text3:'设备位置：市中区汉安大道 988 号',text4:'报修时间：2021 年 7 月 1 日 11:08:22',text5:'报修人：刘全'},
     {text1:'普通枪机 - BH3356',text2:'故障类型：未知离线',text3:'设备位置：市中区汉安大道 988 号',text4:'报修时间：2021 年 7 月 1 日 11:08:22',text5:'报修人：刘全'},
+    {text1:'高点球机 - BH58Z1',text2:'故障类型：未知离线',text3:'设备位置：市中区汉安大道 988 号',text4:'报修时间：2021 年 7 月 1 日 11:08:22',text5:'报修人：刘全'},
+    {text1:'高点球机 - BH58Z1',text2:'故障类型：未知离线',text3:'设备位置：市中区汉安大道 988 号',text4:'报修时间：2021 年 7 月 1 日 11:08:22',text5:'报修人：刘全'},
+    {text1:'高点球机 - BH58Z1',text2:'故障类型：未知离线',text3:'设备位置：市中区汉安大道 988 号',text4:'报修时间：2021 年 7 月 1 日 11:08:22',text5:'报修人：刘全'},
+    {text1:'高点球机 - BH58Z1',text2:'故障类型：未知离线',text3:'设备位置：市中区汉安大道 988 号',text4:'报修时间：2021 年 7 月 1 日 11:08:22',text5:'报修人：刘全'},
     {text1:'高点球机 - BH58Z1',text2:'故障类型：未知离线',text3:'设备位置：市中区汉安大道 988 号',text4:'报修时间：2021 年 7 月 1 日 11:08:22',text5:'报修人：刘全'},
   ]
   @Builder
@@ -178,9 +234,16 @@ struct chulihzong{
   }
   build() {
       Column(){
-        ForEach(this.datas,(item2:Item2)=>{
-          this.myItemUI(item2)
-        })
+
+        List(){
+          ForEach(this.datas,(item2:Item2)=>{
+            ListItem(){
+              this.myItemUI(item2)
+            }
+          })
+        }
+        .layoutWeight(1) // 限制在一个区域
+
       }
   }
 }

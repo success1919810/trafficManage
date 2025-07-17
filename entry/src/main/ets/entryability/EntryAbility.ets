@@ -1,7 +1,7 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
-
+import {DialogHelper} from '@pura/harmony-dialog'
 const DOMAIN = 0x0000;
 
 export default class EntryAbility extends UIAbility {
@@ -43,6 +43,9 @@ export default class EntryAbility extends UIAbility {
   onWindowStageDestroy(): void {
     // Main window is destroyed, release UI related resources
     hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onWindowStageDestroy');
+    DialogHelper.setDefaultConfig((config) => {
+      config.uiAbilityContext = this.context;
+    })
   }
 
   onForeground(): void {
