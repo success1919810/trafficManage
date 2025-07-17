@@ -1,0 +1,14 @@
+{
+  "src": [
+    "pages/Index",
+    "pages/forgetPassword",
+    "pages/setNewPassword",
+    "pages/start",
+    "pages/ApprovalManagement",
+    "pages/starter",
+    "pages/errorSubmit",
+    "pages/xiaoxigonggao",
+    "pages/teqinrenwu",
+    "pages/jingqingrenwu"
+  ]
+}
