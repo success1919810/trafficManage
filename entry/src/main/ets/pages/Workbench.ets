@@ -2,11 +2,6 @@ import router from '@ohos.router'; // 引入路由模块
 
 @Component
 export struct Workbench {
-  @StorageProp('bottomRectHeight')
-  bottomRectHeight: number = 0;
-  @StorageProp('topRectHeight')
-  topRectHeight: number = 0;
-
   build() {
     Column() {
       Row() {
@@ -57,14 +52,6 @@ export struct Workbench {
                 Text('警情任务')
                   .fontSize(14)
               }
-              .onClick(() => {
-                router.pushUrl({
-                  url: 'pages/jingqingrenwu', // 目标页面的路由地址
-                  params: {
-                    title: '警情任务' // 可选参数，传递给目标页面
-                  }
-                });
-              })
               .width('25%')
 
               Column({ space: 20 }) {
@@ -74,22 +61,24 @@ export struct Workbench {
                 Text('特勤任务')
                   .fontSize(14)
               }
-              .onClick(() => {
-                router.pushUrl({
-                  url: 'pages/teqinrenwu', // 目标页面的路由地址
-                  params: {
-                    title: '特勤任务' // 可选参数，传递给目标页面
-                  }
-                });
-              })
               .width('25%')
 
               Column({ space: 20 }) {
                 Image($r('app.media.a')) // 统一使用图片a
                   .width(40)
                   .height(40)
+                  .onClick(() => {
+                    // 点击后跳转到审批管理页面
+                    router.pushUrl({ url: 'pages/qinwu' });
+                  })
                 Text('勤务排班')
                   .fontSize(14)
+                  .onClick(() => {
+                    // 点击后跳转到审批管理页面
+                    router.pushUrl({
+                      url: 'pages/qinwu' // 根据你的路由配置修改路径
+                    });
+                  })
               }
               .width('25%')
             }
@@ -125,6 +114,12 @@ export struct Workbench {
                 Text('施工占道')
                   .fontSize(14)
               }
+              .onClick(() => {
+                // 点击后跳转到审批管理页面
+                router.pushUrl({
+                  url: 'pages/shigong' // 根据你的路由配置修改路径
+                });
+              })
               .width('25%') // 占每行四分之一宽度
 
               Column({ space: 20 }) {
@@ -134,6 +129,12 @@ export struct Workbench {
                 Text('缉查布控')
                   .fontSize(14)
               }
+              .onClick(() => {
+                // 点击后跳转到审批管理页面
+                router.pushUrl({
+                  url: 'pages/jicha' // 根据你的路由配置修改路径
+                });
+              })
               .width('25%')
 
               Column({ space: 20 }) {
@@ -152,14 +153,6 @@ export struct Workbench {
                 Text('故障上报')
                   .fontSize(14)
               }
-              .onClick(() => {
-                router.pushUrl({
-                  url: 'pages/errorSubmit', // 目标页面的路由地址
-                  params: {
-                    title: '警情任务' // 可选参数，传递给目标页面
-                  }
-                });
-              })
               .width('25%')
             }
             .width('100%')
@@ -279,9 +272,6 @@ export struct Workbench {
       .height('100%')
 
     }
-    .padding({ top: px2vp(this.topRectHeight), bottom: px2vp(this.bottomRectHeight) })
-    .width('100%')
-    .height('100%')
   }
 }
 //消息公告
