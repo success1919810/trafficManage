@@ -1,0 +1,71 @@
+@Component
+export struct jc2 {
+  build() {
+    Scroll(){
+      Column(){
+        Column({space:10}){
+          Row(){
+            Text('川K·A7H86')
+              .fontSize(20)
+              .fontColor('#ff0000')
+              .fontWeight(FontWeight.Bold)
+          }
+          .justifyContent(FlexAlign.Start)
+          .width('100%')
+          Row(){
+            Text('抓拍地点：内江市东兴区汉安大道西段988号\n抓拍时间：2021年6月28日10:12:34\n任务时间：2021年6月25日15:27:29\n')
+              .fontSize(16)
+              .fontColor('#666666')
+
+          }
+          .justifyContent(FlexAlign.Start)
+          .width('100%')
+          Row(){
+            Text('已过期')
+              .fontSize(14)
+              .fontColor('#0000ff')
+          }
+          .justifyContent(FlexAlign.Start)
+          .width('100%')
+        }
+        .margin({top:10})
+        .backgroundColor('#ffffff')
+        .borderRadius(10)
+        Column({space:10}){
+          Row(){
+            Text('川K·A7H86')
+              .fontSize(20)
+              .fontColor('#ff0000')
+              .fontWeight(FontWeight.Bold)
+          }
+          .justifyContent(FlexAlign.Start)
+          .width('100%')
+          Row(){
+            Text('抓拍地点：内江市东兴区汉安大道西段988号\n抓拍时间：2021年6月28日10:12:34\n任务时间：2021年6月25日15:27:29\n')
+              .fontSize(16)
+              .fontColor('#666666')
+
+          }
+          .justifyContent(FlexAlign.Start)
+          .width('100%')
+          Row(){
+            Text('已撤诉')
+              .fontSize(14)
+              .fontColor('#0000ff')
+          }
+          .justifyContent(FlexAlign.Start)
+          .width('100%')
+        }
+        .margin({top:10})
+        .backgroundColor('#ffffff')
+        .borderRadius(10)
+      }
+      .margin({left:'5%',right:'5%'})
+      .width('90%')
+    }
+    .position({top:0})
+
+    .scrollable(ScrollDirection.Vertical)
+  }
+
+}
