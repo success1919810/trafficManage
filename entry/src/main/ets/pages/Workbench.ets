@@ -1,5 +1,5 @@
 import router from '@ohos.router'; // 引入路由模块
-
+@Entry
 @Component
 export struct Workbench {
   @StorageProp('bottomRectHeight')
@@ -91,6 +91,14 @@ export struct Workbench {
                 Text('勤务排班')
                   .fontSize(14)
               }
+              .onClick(() => {
+                router.pushUrl({
+                  url: 'pages/qinwu', // 目标页面的路由地址
+                  params: {
+                    title: '特勤任务' // 可选参数，传递给目标页面
+                  }
+                });
+              })
               .width('25%')
             }
             .width('100%')
@@ -125,6 +133,14 @@ export struct Workbench {
                 Text('施工占道')
                   .fontSize(14)
               }
+              .onClick(() => {
+                router.pushUrl({
+                  url: 'pages/shigong', // 目标页面的路由地址
+                  params: {
+                    title: '特勤任务' // 可选参数，传递给目标页面
+                  }
+                });
+              })
               .width('25%') // 占每行四分之一宽度
 
               Column({ space: 20 }) {
@@ -134,6 +150,14 @@ export struct Workbench {
                 Text('缉查布控')
                   .fontSize(14)
               }
+              .onClick(() => {
+                router.pushUrl({
+                  url: 'pages/jicha', // 目标页面的路由地址
+                  params: {
+                    title: '特勤任务' // 可选参数，传递给目标页面
+                  }
+                });
+              })
               .width('25%')
 
               Column({ space: 20 }) {
@@ -173,6 +197,14 @@ export struct Workbench {
                 Text('问题调研上报')
                   .fontSize(14)
               }
+              .onClick(() => {
+                router.pushUrl({
+                  url: 'pages/exceptionSubmit', // 目标页面的路由地址
+                  params: {
+                    title: '异常上报' // 可选参数，传递给目标页面
+                  }
+                });
+              })
               .width('25%')
             }
             .width('100%')

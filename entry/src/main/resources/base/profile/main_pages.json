@@ -1,12 +1,17 @@
 {
   "src": [
-    "pages/Index",
     "pages/forgetPassword",
     "pages/setNewPassword",
-    "pages/start",
-    "pages/ApprovalManagement",
     "pages/starter",
+    "pages/Workbench",
+    "pages/ApprovalManagement",
     "pages/errorSubmit",
+    "pages/exceptionSubmit",
+    "pages/start",
+    "pages/Index",
+    "pages/qinwu",
+    "pages/shigong",
+    "pages/jicha",
     "pages/xiaoxigonggao",
     "pages/teqinrenwu",
     "pages/jingqingrenwu"

@@ -5,13 +5,17 @@
       "pages/setNewPassword",
       "pages/starter",
       "pages/Workbench",
+      "pages/start",
       "pages/ApprovalManagement",
-      "pages/home",
-      "pages/map",
-      "pages/Starter",
+      "pages/errorSubmit",
+      "pages/exceptionSubmit",
+      "pages/Index",
       "pages/qinwu",
       "pages/shigong",
-      "pages/jicha"
+      "pages/jicha",
+      "pages/xiaoxigonggao",
+      "pages/teqinrenwu",
+      "pages/jingqingrenwu"
     ]
   }
 }

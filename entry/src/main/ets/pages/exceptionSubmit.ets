@@ -1,4 +1,7 @@
 import router from '@ohos.router';
+import { MapComponent, mapCommon, map } from '@kit.MapKit';
+import { AsyncCallback } from '@kit.BasicServicesKit';
+
 @Entry
 @Component
 struct ExceptionSubmit {
@@ -8,6 +11,42 @@ struct ExceptionSubmit {
   bottomRectHeight: number = 0;
   @StorageProp('topRectHeight')
   topRectHeight: number = 0;
+  private mapOptions?: mapCommon.MapOptions;
+  private callback?: AsyncCallback<map.MapComponentController>;
+  private mapController?: map.MapComponentController;
+
+
+
+  aboutToAppear(): void {
+
+    let target: mapCommon.LatLng = {
+      latitude: 39.9181,
+      longitude: 116.3970193
+    }
+    let cameraPosition: mapCommon.CameraPosition = {
+      target: target,
+      zoom: 15
+    }
+    this.mapOptions = {
+      position: cameraPosition
+    }
+
+    // 地图初始化的回调
+    this.callback = async (err, mapController) => {
+      if (!err) {
+        this.mapController = mapController;
+        // 初始化marker（标记）参数
+        let markerOptions: mapCommon.MarkerOptions = {
+          position: {
+            latitude: 39.9181,
+            longitude: 116.3970193
+          }
+        };
+        // 新建一个默认的marker图标
+        await this.mapController?.addMarker(markerOptions);
+      }
+    }
+  }
 
   @Builder
   mysheet() {
@@ -96,33 +135,32 @@ struct ExceptionSubmit {
     .padding(16); // 整体加内边距，避免内容贴边
   }
   build() {
-      Stack(){
+    Stack(){
 
-        Image($r('app.media.map'))
+      Column(){
 
-        Column(){
+        MapComponent({ mapOptions: this.mapOptions, mapCallback: this.callback }).width('100%').height('100%');
+        Row({space:4}){
 
-          Row({space:3}){
+          Text('<')
+            .fontSize(40)
+            .height(40)
+            .onClick(() => router.back())
 
-            Text('<')
-              .fontSize(26)
-              .width('10%')
-              .onClick(() => router.back())
-
-            Search({placeholder: '搜地点 搜路线'})
-              .height(40)
-              .width(360)
-
-          }
-          .width('95%')
-          .position({ top: 30 ,left:10})
+          Search({placeholder: '搜地点 搜路线'})
+            .height(40)
+            .width(360)
 
         }
-        .bindSheet(this.isShow,this.mysheet(),{height:SheetSize.FIT_CONTENT,showClose:false})
+        .width('95%')
+        .position({ top: 5 ,left:10})
 
       }
-      .width('100%')
-      .height('100%')
-      .padding({ top: px2vp(this.topRectHeight), bottom: px2vp(this.bottomRectHeight) })
+      .bindSheet(this.isShow,this.mysheet(),{height:SheetSize.FIT_CONTENT,showClose:false})
+
+    }
+    .width('100%')
+    .height('100%')
+    .padding({ top: px2vp(this.topRectHeight), bottom: px2vp(this.bottomRectHeight) })
   }
 }
