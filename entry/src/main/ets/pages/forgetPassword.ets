@@ -40,7 +40,7 @@ struct forgetPassword {
                 .width('10%')
           // Row().width(26).height(26)
         }
-
+        Row().width("100%").height(1).backgroundColor('#f0f0f0')
       // 步骤导航（简单文字示意，实际可做更精致的进度条或分段UI）
       Row() {
         Text('1.验证手机号码')
@@ -51,58 +51,64 @@ struct forgetPassword {
           .fontSize(14)
           .fontColor('#999999');
       }
-      .margin({ bottom: 20 })
-      .justifyContent(FlexAlign.Center);
+      .margin({ bottom: 15,top:20 })
+      .width('60%')
+      .justifyContent(FlexAlign.SpaceBetween);
+      Column(){
 
-      // 手机号码输入框
-      TextInput({ placeholder: '请输入手机号码' })
-        .type(InputType.PhoneNumber)
-        .margin({ bottom: 10 })
-        .onChange((value: string) => {
-          this.phoneNumber = value;
-        });
-
-      // 验证码输入 + 发送按钮 行布局
-      Row() {
-        TextInput({ placeholder: '请输入短信验证码' })
-          .type(InputType.Number)
-          .flexGrow(1)
-          .margin({ right: 10 })
-          .width('70%')
+        TextInput({ placeholder: '请输入手机号码' })
+          .type(InputType.PhoneNumber)
+          .margin({ bottom: 10,top:15 })
           .onChange((value: string) => {
-            this.verifyCode = value;
-          });
+            this.phoneNumber = value;
+          }).width('90%');
 
-        Button('发送验证码')
-          .fontSize(14)
-          .width('30%')
-          .backgroundColor(this.canSendCode ? '#007AFF' : '#999999')
+        // 验证码输入 + 发送按钮 行布局
+        Row() {
+          TextInput({ placeholder: '请输入短信验证码' })
+            .type(InputType.Number)
+            .flexGrow(1)
+            .margin({ right: 10 })
+            .width('70%')
+            .onChange((value: string) => {
+              this.verifyCode = value;
+            });
+
+          Button('发送验证码')
+            .fontSize(14)
+            .width('30%')
+            .backgroundColor(this.canSendCode ? '#007AFF' : '#999999')
+            .onClick(() => {
+              if (this.canSendCode && this.phoneNumber.length === 11) {
+                // 这里可调用实际的短信验证码发送接口，比如调用后端接口
+                console.log(`向手机号码 ${this.phoneNumber} 发送验证码`);
+                this.startCountDown();
+              }
+            });
+        }
+        .width('90%')
+        .margin({ bottom: 20 });
+
+        // 下一步按钮
+        Button('下一步')
+          .width('90%')
+          .backgroundColor('#007AFF')
           .onClick(() => {
-            if (this.canSendCode && this.phoneNumber.length === 11) {
-              // 这里可调用实际的短信验证码发送接口，比如调用后端接口
-              console.log(`向手机号码 ${this.phoneNumber} 发送验证码`);
-              this.startCountDown();
+            if (this.phoneNumber && this.verifyCode) {
+              router.pushUrl({
+                url: 'pages/setNewPassword',
+                params: { phone: this.phoneNumber }
+              });
+            } else {
+              prompt.showToast({ message: '请填写完整信息' });
             }
           });
-      }
-      .margin({ bottom: 20 });
 
-      // 下一步按钮
-      Button('下一步')
-        .width('100%')
-        .backgroundColor('#007AFF')
-        .onClick(() => {
-          if (this.phoneNumber && this.verifyCode) {
-            router.pushUrl({
-              url: 'pages/setNewPassword',
-              params: { phone: this.phoneNumber }
-            });
-          } else {
-            prompt.showToast({ message: '请填写完整信息' });
-          }
-        });
+      }
+      .height('100%')
+      .width('100%')
+      .backgroundColor('#f0f0f0')
     }
-    .padding(20)
     .width('100%')
     .height('100%')
     .padding({ top: px2vp(this.topRectHeight), bottom: px2vp(this.bottomRectHeight) })
