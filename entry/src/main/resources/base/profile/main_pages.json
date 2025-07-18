@@ -9,7 +9,6 @@
     "pages/errorSubmit",
     "pages/xiaoxigonggao",
     "pages/teqinrenwu",
-    "pages/jingqingrenwu",
-    "pages/exceptionSubmit"
+    "pages/jingqingrenwu"
   ]
 }

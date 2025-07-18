@@ -7,9 +7,11 @@
       "pages/Workbench",
       "pages/ApprovalManagement",
       "pages/home",
-      "pages/xiaoxigonggao",
-      "pages/teqinrenwu",
-      "pages/start"
+      "pages/map",
+      "pages/Starter",
+      "pages/qinwu",
+      "pages/shigong",
+      "pages/jicha"
     ]
   }
 }

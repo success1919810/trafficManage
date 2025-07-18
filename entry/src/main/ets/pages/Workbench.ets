@@ -173,14 +173,6 @@ export struct Workbench {
                 Text('问题调研上报')
                   .fontSize(14)
               }
-              .onClick(() => {
-                router.pushUrl({
-                  url: 'pages/exceptionSubmit', // 目标页面的路由地址
-                  params: {
-                    title: '问题调研上报' // 可选参数，传递给目标页面
-                  }
-                });
-              })
               .width('25%')
             }
             .width('100%')
