@@ -14,7 +14,7 @@ struct Starter {
         clearInterval(this.taskId)
         //2、跳转到登录页面
         //router.pushUrl({url:'pages/Index'})   //保留当前页面
-        router.replaceUrl({url:'pages/Index'}) //清除当前页面
+        router.replaceUrl({url:'pages/start'}) //清除当前页面
       }
       this.count--
     },1000)
