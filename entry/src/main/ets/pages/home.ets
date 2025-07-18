@@ -1,4 +1,4 @@
-
+import router from '@ohos.router'; // 引入路由模块
 @Component
 export struct home {
   build() {
@@ -132,7 +132,7 @@ export struct home {
             .height(100)
             .justifyContent(FlexAlign.Center)
             .onClick(() => {
-              // 跳转到警情任务页面
+              router.pushUrl({url:"pages/jingqingrenwu"})// 跳转到警情任务页面
             })
 
             Column() {
@@ -147,6 +147,7 @@ export struct home {
             .justifyContent(FlexAlign.Center)
             .onClick(() => {
               // 跳转到特情任务页面
+              router.pushUrl({url:"pages/teqinrenwu"})
             })
 
             Column() {
@@ -161,6 +162,7 @@ export struct home {
             .justifyContent(FlexAlign.Center)
             .onClick(() => {
               // 跳转到问题上报页面
+              router.pushUrl({url:"pages/exceptionSubmit"})
             })
           }
           .backgroundColor('#ffffff')

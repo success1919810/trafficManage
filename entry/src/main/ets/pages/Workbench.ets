@@ -34,7 +34,7 @@ export struct Workbench {
             // 第一行（4个项目）
             Row() {
               Column({ space: 20 }) {
-                Image($r('app.media.a')) // 统一使用图片a
+                Image($r('app.media.work1')) // 统一使用图片a
                   .width(40)
                   .height(40)
                 Text('消息公告')
@@ -51,7 +51,7 @@ export struct Workbench {
               .width('25%') // 占每行四分之一宽度
 
               Column({ space: 20 }) {
-                Image($r('app.media.a')) // 统一使用图片a
+                Image($r('app.media.work2')) // 统一使用图片a
                   .width(40)
                   .height(40)
                 Text('警情任务')
@@ -68,7 +68,7 @@ export struct Workbench {
               .width('25%')
 
               Column({ space: 20 }) {
-                Image($r('app.media.a')) // 统一使用图片a
+                Image($r('app.media.work3')) // 统一使用图片a
                   .width(40)
                   .height(40)
                 Text('特勤任务')
@@ -85,7 +85,7 @@ export struct Workbench {
               .width('25%')
 
               Column({ space: 20 }) {
-                Image($r('app.media.a')) // 统一使用图片a
+                Image($r('app.media.work4')) // 统一使用图片a
                   .width(40)
                   .height(40)
                 Text('勤务排班')
@@ -127,7 +127,7 @@ export struct Workbench {
             // 第一行（4个项目）
             Row() {
               Column({ space: 20 }) {
-                Image($r('app.media.a')) // 统一使用图片a
+                Image($r('app.media.work5')) // 统一使用图片a
                   .width(40)
                   .height(40)
                 Text('施工占道')
@@ -144,7 +144,7 @@ export struct Workbench {
               .width('25%') // 占每行四分之一宽度
 
               Column({ space: 20 }) {
-                Image($r('app.media.a')) // 统一使用图片a
+                Image($r('app.media.work6')) // 统一使用图片a
                   .width(40)
                   .height(40)
                 Text('缉查布控')
@@ -161,7 +161,7 @@ export struct Workbench {
               .width('25%')
 
               Column({ space: 20 }) {
-                Image($r('app.media.a')) // 统一使用图片a
+                Image($r('app.media.work7')) // 统一使用图片a
                   .width(40)
                   .height(40)
                 Text('占道停车')
@@ -170,7 +170,7 @@ export struct Workbench {
               .width('25%')
 
               Column({ space: 20 }) {
-                Image($r('app.media.a')) // 统一使用图片a
+                Image($r('app.media.work8')) // 统一使用图片a
                   .width(40)
                   .height(40)
                 Text('故障上报')
@@ -191,7 +191,7 @@ export struct Workbench {
             // 第二行（剩余1个项目）
             Row() {
               Column({ space: 20 }) {
-                Image($r('app.media.a')) // 统一使用图片a
+                Image($r('app.media.work9')) // 统一使用图片a
                   .width(40)
                   .height(40)
                 Text('问题调研上报')
@@ -230,7 +230,7 @@ export struct Workbench {
             // 第一行（4个项目）
             Row() {
               Column({ space: 20 }) {
-                Image($r('app.media.a')) // 统一使用图片a
+                Image($r('app.media.work10')) // 统一使用图片a
                   .width(40)
                   .height(40)
                   .onClick(() => {
@@ -251,7 +251,7 @@ export struct Workbench {
               .width('25%') // 占每行四分之一宽度
 
               Column({ space: 20 }) {
-                Image($r('app.media.a')) // 统一使用图片a
+                Image($r('app.media.work11')) // 统一使用图片a
                   .width(40)
                   .height(40)
                 Text('我的上报')
@@ -260,7 +260,7 @@ export struct Workbench {
               .width('25%')
 
               Column({ space: 20 }) {
-                Image($r('app.media.a')) // 统一使用图片a
+                Image($r('app.media.work12')) // 统一使用图片a
                   .width(40)
                   .height(40)
                 Text('请假管理')
@@ -269,7 +269,7 @@ export struct Workbench {
               .width('25%')
 
               Column({ space: 20 }) {
-                Image($r('app.media.a')) // 统一使用图片a
+                Image($r('app.media.work13')) // 统一使用图片a
                   .width(40)
                   .height(40)
                 Text('我的效绩')
@@ -282,7 +282,7 @@ export struct Workbench {
             // 第二行（剩余1个项目）
             Row() {
               Column({ space: 20 }) {
-                Image($r('app.media.a')) // 统一使用图片a
+                Image($r('app.media.work14')) // 统一使用图片a
                   .width(40)
                   .height(40)
                 Text('异常勤务')
@@ -290,7 +290,7 @@ export struct Workbench {
               }
               .width('25%')
               Column({ space: 20 }) {
-                Image($r('app.media.a')) // 统一使用图片a
+                Image($r('app.media.work15')) // 统一使用图片a
                   .width(40)
                   .height(40)
                 Text('异常警情' )

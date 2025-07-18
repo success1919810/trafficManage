@@ -23,6 +23,10 @@ function formatDate(date: Date): string {
 struct Jingqingrenwu {
   swiper: SwiperController = new SwiperController();
   @State currentIndex: number = 0; // 标签索引（0-待签收 1-中途中 2-处理中 3-已反馈 4-已完成）
+  @StorageProp('bottomRectHeight')
+  bottomRectHeight: number = 0;
+  @StorageProp('topRectHeight')
+  topRectHeight: number = 0;
 
   build() {
     Column() {
@@ -135,6 +139,7 @@ struct Jingqingrenwu {
       .borderRadius(10)
       .margin({ top: 10 })
     }
+    .padding({ top: px2vp(this.topRectHeight), bottom: px2vp(this.bottomRectHeight) })
     .width('100%')
     .height('100%')
     .backgroundColor('#F5F5F5') // 页面背景色

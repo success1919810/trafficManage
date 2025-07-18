@@ -31,6 +31,10 @@ function formatDate(date: Date): string {
 struct Teqinrenwu {
   swiper: SwiperController = new SwiperController();
   @State currentIndex: number = 0;
+  @StorageProp('bottomRectHeight')
+  bottomRectHeight: number = 0;
+  @StorageProp('topRectHeight')
+  topRectHeight: number = 0;
 
   build() {
     Column() {
@@ -112,6 +116,7 @@ struct Teqinrenwu {
       .width('100%')
       .height('70%'); // 调整高度避免内容溢出
     }
+    .padding({ top: px2vp(this.topRectHeight), bottom: px2vp(this.bottomRectHeight) })
     .width('100%')
     .height('100%')
     .backgroundColor('#F5F5F5');
