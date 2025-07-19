@@ -15,7 +15,10 @@
       "pages/jicha",
       "pages/xiaoxigonggao",
       "pages/teqinrenwu",
-      "pages/jingqingrenwu"
+      "pages/jingqingrenwu",
+      "pages/abnormalCase",
+      "pages/MyReport",
+      "pages/tongzhigonggao"
     ]
   }
 }

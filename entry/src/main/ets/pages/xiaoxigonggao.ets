@@ -129,7 +129,11 @@ struct xiaoxi {
     .backgroundColor('#FFFFFF') // 改用白色背景更美观
     .borderRadius(15)
     .margin({ top: 20 })
-    .shadow({ radius: 3, color: '#00000010' });
+    .shadow({ radius: 3, color: '#00000010' })
+    .onClick(()=>{
+      router.pushUrl({url:"pages/xitongxiaoxi"})
+    })
+
   }
 
   @State isRefresh:boolean =false
@@ -184,7 +188,15 @@ struct gonggao {
     .backgroundColor('#FFFFFF') // 改用白色背景更美观
     .borderRadius(15)
     .margin({ top: 20 })
-    .shadow({ radius: 3, color: '#00000010' });
+    .shadow({ radius: 3, color: '#00000010' })
+    .onClick(() => {
+      router.pushUrl({
+        url: 'pages/tongzhigonggao', // 目标页面的路由地址
+        params: {
+          title: '异常上报' // 可选参数，传递给目标页面
+        }
+      });
+    })
   }
 
   @State isRefresh:boolean =false

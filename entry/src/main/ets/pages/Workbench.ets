@@ -257,6 +257,14 @@ export struct Workbench {
                 Text('我的上报')
                   .fontSize(14)
               }
+              .onClick(() => {
+                router.pushUrl({
+                  url: 'pages/MyReport', // 目标页面的路由地址
+                  params: {
+                    title: '我的上报' // 可选参数，传递给目标页面
+                  }
+                });
+              })
               .width('25%')
 
               Column({ space: 20 }) {
@@ -296,6 +304,14 @@ export struct Workbench {
                 Text('异常警情' )
                   .fontSize(14)
               }
+              .onClick(() => {
+                router.pushUrl({
+                  url: 'pages/abnormalCase', // 目标页面的路由地址
+                  params: {
+                    title: '异常警情' // 可选参数，传递给目标页面
+                  }
+                });
+              })
               .width('25%')
             }
             .width('100%')
