@@ -1,4 +1,6 @@
 import router from '@ohos.router';
+
+
 interface Item1 {
   contents: string;
   location: string;
@@ -26,16 +28,16 @@ function formatDate(date: Date): string {
   const day = date.getDate();
   return `${year}年${month}月${day}日`;
 }
+
 @Entry
 @Component
-struct Teqinrenwu {
+export struct xiaoxigonggao {
   swiper: SwiperController = new SwiperController();
-  @State currentIndex: number = 0;
+  @State currentIndex: number = 0; // 修正变量名拼写（currentIndeX → currentIndex）
   @StorageProp('bottomRectHeight')
   bottomRectHeight: number = 0;
   @StorageProp('topRectHeight')
   topRectHeight: number = 0;
-
   build() {
     Column() {
       // 顶部导航栏
@@ -60,7 +62,6 @@ struct Teqinrenwu {
       .backgroundColor('#007AFF') // 导航栏主色调
       .justifyContent(FlexAlign.SpaceBetween)
       .padding({ left: 15, right: 15 })
-      .margin({ top: 20 }) // 顶部间距
 
 
       // 消息/公告标签栏（核心修改部分）
@@ -116,13 +117,14 @@ struct Teqinrenwu {
       .width('100%')
       .height('70%'); // 调整高度避免内容溢出
     }
-    .padding({ top: px2vp(this.topRectHeight), bottom: px2vp(this.bottomRectHeight) })
     .width('100%')
     .height('100%')
-    .backgroundColor('#F5F5F5');
+    .backgroundColor('#F5F5F5')
+    .padding({ top: px2vp(this.topRectHeight), bottom: px2vp(this.bottomRectHeight)})
   }
 }
 
+// 消息组件
 @Component
 struct daiqianshou {
   datas: Item1[] = [
@@ -153,6 +155,10 @@ struct daiqianshou {
               .backgroundColor('#007AFF')
               .fontColor('#FFFFFF')
               .borderRadius(6)
+              .onClick(() => {
+                // 跳转至到场反馈页
+                router.pushUrl({ url: 'pages/renwuqianshou' })
+              })
 
             Button(item.actionText2)
               .width('45%')
@@ -161,6 +167,10 @@ struct daiqianshou {
               .backgroundColor('#007AFF')
               .fontColor('#FFFFFF')
               .borderRadius(6)
+              .onClick(() => {
+                // 跳转至到场反馈页
+                router.pushUrl({ url: 'pages/renwutuihui' })
+              })
           }
         }
       }
@@ -221,6 +231,10 @@ struct daifankui {
           .backgroundColor('#007AFF')
           .fontColor('#FFFFFF')
           .borderRadius(6)
+          .onClick(() => {
+            // 跳转至到场反馈页
+            router.pushUrl({ url: 'pages/jingqingfankui' })
+          })
       }
     }
     .padding(20)

@@ -1,3 +1,4 @@
+import router from '@ohos.router'; // 引入路由模块
 // 1. 完善接口定义，明确值班数据结构
 interface Item1 {
   date: string;          // 值班日期
@@ -94,6 +95,17 @@ export struct yzhiban {
         // 条件显示"申请调整"按钮
         if (item.showAdjustBtn) {
           Text('申请调整')
+            .onClick(() => {
+              router.pushUrl({
+                url: 'pages/qinwushenqing', // 目标页面的路由地址
+                params: {
+                  date:item.date,
+                  location: item.location,
+                  shiftName: item.shiftName,
+                  time:item.time // 可选参数，传递给目标页面
+                }
+              });
+            })
             .fontColor('#ffffff')
             .fontSize(16)
             .padding(5)
@@ -104,6 +116,17 @@ export struct yzhiban {
 
         // "提交值班"按钮（所有卡片都显示）
         Text('提交值班')
+          .onClick(() => {
+            router.pushUrl({
+              url: 'pages/qinwutijiao', // 目标页面的路由地址
+              params: {
+                date:item.date,
+                location: item.location,
+                shiftName: item.shiftName,
+                time:item.time // 可选参数，传递给目标页面
+              }
+            });
+          })
           .fontColor('#ffffff')
           .fontSize(16)
           .padding(5)
