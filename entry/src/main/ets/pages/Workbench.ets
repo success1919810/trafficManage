@@ -167,6 +167,14 @@ export struct Workbench {
                 Text('问题上报')
                   .fontSize(14)
               }
+              .onClick(() => {
+                router.pushUrl({
+                  url: 'pages/questionSubmit', // 目标页面的路由地址
+                  params: {
+                    title: '警情任务' // 可选参数，传递给目标页面
+                  }
+                });
+              })
               .width('25%')
 
               Column({ space: 20 }) {

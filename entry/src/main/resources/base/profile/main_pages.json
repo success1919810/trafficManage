@@ -30,6 +30,7 @@
     "pages/gongdanxingxi_finish",
     "pages/gongdanxingxi_done",
     "pages/gongdanxingxi_ing",
-    "pages/gongdanpingjia"
+    "pages/gongdanpingjia",
+    "pages/questionSubmit"
   ]
 }
