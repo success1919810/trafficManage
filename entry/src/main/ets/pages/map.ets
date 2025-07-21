@@ -1,6 +1,7 @@
 import { MapComponent, mapCommon, map } from '@kit.MapKit';
 import { AsyncCallback } from '@kit.BasicServicesKit';
 
+
 @Component
 @Entry
 export struct mapinindex{

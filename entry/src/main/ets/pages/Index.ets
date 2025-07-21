@@ -2,11 +2,11 @@ import { mapinindex } from './map';
 import { home } from './home';
 import { Workbench } from './Workbench';
 
+
 @Entry
 @Component
 struct Index {
   @State currentIndex: number = 0;
-
 
   @Builder
   myTabsBar(img: Resource, title: string, index: number) {

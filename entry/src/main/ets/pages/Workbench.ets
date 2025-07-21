@@ -164,7 +164,7 @@ export struct Workbench {
                 Image($r('app.media.work7')) // 统一使用图片a
                   .width(40)
                   .height(40)
-                Text('占道停车')
+                Text('问题上报')
                   .fontSize(14)
               }
               .width('25%')

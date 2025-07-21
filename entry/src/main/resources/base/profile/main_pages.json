@@ -25,6 +25,11 @@
     "pages/jingqingtuidan",
     "pages/jingqingxiangqing",
     "pages/renwuqianshou",
-    "pages/renwutuihui"
+    "pages/renwutuihui",
+    "pages/gongdanxingxi",
+    "pages/gongdanxingxi_finish",
+    "pages/gongdanxingxi_done",
+    "pages/gongdanxingxi_ing",
+    "pages/gongdanpingjia"
   ]
 }
