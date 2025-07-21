@@ -18,6 +18,13 @@
     "pages/abnormalCase",
     "pages/MyReport",
     "pages/tongzhigonggao",
-    "pages/xitongxiaoxi"
+    "pages/xitongxiaoxi",
+    "pages/jingqingchuzhi",
+    "pages/jingqingfankui",
+    "pages/jingqingqianshou",
+    "pages/jingqingtuidan",
+    "pages/jingqingxiangqing",
+    "pages/renwuqianshou",
+    "pages/renwutuihui"
   ]
 }

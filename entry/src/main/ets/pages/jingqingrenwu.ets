@@ -23,6 +23,7 @@ function formatDate(date: Date): string {
 struct Jingqingrenwu {
   swiper: SwiperController = new SwiperController();
   @State currentIndex: number = 0; // 标签索引（0-待签收 1-中途中 2-处理中 3-已反馈 4-已完成）
+
   @StorageProp('bottomRectHeight')
   bottomRectHeight: number = 0;
   @StorageProp('topRectHeight')
@@ -55,7 +56,6 @@ struct Jingqingrenwu {
       .backgroundColor('#007AFF') // 导航栏主色调
       .justifyContent(FlexAlign.SpaceBetween)
       .padding({ left: 15, right: 15 })
-      .margin({ top: 20 }) // 顶部间距
 
       // 月份标题（优化样式）
       Text('6月')
@@ -139,10 +139,11 @@ struct Jingqingrenwu {
       .borderRadius(10)
       .margin({ top: 10 })
     }
-    .padding({ top: px2vp(this.topRectHeight), bottom: px2vp(this.bottomRectHeight) })
     .width('100%')
     .height('100%')
     .backgroundColor('#F5F5F5') // 页面背景色
+
+    .padding({ top: px2vp(this.topRectHeight), bottom: px2vp(this.bottomRectHeight)})
   }
 
   // 构建单个标签（带选中样式）
@@ -152,7 +153,7 @@ struct Jingqingrenwu {
       .fontSize(18)
       .fontWeight(this.currentIndex === index ? FontWeight.Bold : FontWeight.Normal)
       .fontColor(this.currentIndex === index ? '#007AFF' : '#666666')
-    // 选中时下划线
+      // 选中时下划线
 
   }
 }
@@ -198,31 +199,27 @@ struct daiqianshou {
   @Builder
   myItemUI(item: TaskBase) {
     Column({ space: 12 }) {
-      // 标题+日期（左右分布）
       Row() {
         Text(item.title)
           .fontSize(18)
           .fontWeight(FontWeight.Bold)
           .fontColor('#333333')
-          .flexGrow(1); // 标题占满剩余空间
+          .flexGrow(1);
 
         Text(formatDate(item.createdAt))
           .fontSize(12)
           .fontColor('#999999');
       }
 
-      // 内容描述
       Text(item.contents)
         .fontSize(14)
         .fontColor('#666666')
-        .lineHeight(20); // 行高优化
+        .lineHeight(20);
 
-      // 剩余时间（红色强调）
       Text(`剩余时间：${item.timeRemaining}`)
         .fontSize(14)
-        .fontColor('#FF3B30') // 强调色
+        .fontColor('#FF3B30')
 
-      // 操作按钮（左右分布）
       Row({ space: 15 }) {
         Button(item.actionText1)
           .width('45%')
@@ -231,7 +228,10 @@ struct daiqianshou {
           .backgroundColor('#007AFF')
           .fontColor('#FFFFFF')
           .borderRadius(6)
-          .onClick(() => console.log(`${item.actionText1}：${item.title}`));
+          .onClick(() => {
+            // 跳转至签收详情页
+            router.pushUrl({ url: 'pages/jingqingqianshou' })
+          })
 
         Button(item.actionText2)
           .width('45%')
@@ -240,7 +240,10 @@ struct daiqianshou {
           .backgroundColor('#F5F5F5')
           .fontColor('#333333')
           .borderRadius(6)
-          .onClick(() => console.log(`${item.actionText2}：${item.title}`));
+          .onClick(() => {
+            // 跳转至退回原因填写页
+            router.pushUrl({ url: 'pages/jingqingtuidan' })
+          });
       }
       .width('100%')
     }
@@ -248,28 +251,31 @@ struct daiqianshou {
     .width('100%')
     .backgroundColor('#FFFFFF')
     .borderRadius(12)
-    .shadow({ radius: 6, color: '#00000010', offsetY: 2 }) // 卡片阴影（更立体）
+    .shadow({ radius: 6, color: '#00000010', offsetY: 2 })
     .margin({ top: 15 });
   }
 
-  @State isRefresh:boolean =false
+  @State isRefresh: boolean = false
 
   build() {
-    Refresh({refreshing:this.isRefresh,promptText:'努力加载中...'}){
-      List(){
-        ForEach(this.datas, (item: TaskBase) =>{ListItem(){this.myItemUI(item)}});
+    Refresh({ refreshing: this.isRefresh, promptText: '努力加载中...' }) {
+      List() {
+        ForEach(this.datas, (item: TaskBase) => {
+          ListItem() { this.myItemUI(item) }
+        });
       }
       .width('100%')
       .height('100%')
       .padding({ left: 15, right: 15 });
-    }.onRefreshing(()=>{this.isRefresh=true
-      setTimeout(()=>{this.isRefresh=false},2000)})
-
-
+    }
+    .onRefreshing(() => {
+      this.isRefresh = true
+      setTimeout(() => { this.isRefresh = false }, 2000)
+    })
   }
 }
 
-// 中途中组件（美化）
+// 中途中组件
 @Component
 struct zhongtuzhong {
   datas: TaskBase[] = [
@@ -306,7 +312,6 @@ struct zhongtuzhong {
         .fontSize(14)
         .fontColor('#FF3B30')
 
-      // 单个操作按钮（居中）
       Button(item.actionText1)
         .width('100%')
         .height(40)
@@ -314,7 +319,10 @@ struct zhongtuzhong {
         .backgroundColor('#007AFF')
         .fontColor('#FFFFFF')
         .borderRadius(6)
-        .onClick(() => console.log(`${item.actionText1}：${item.title}`));
+        .onClick(() => {
+          // 跳转至到场反馈页
+          router.pushUrl({ url: 'pages/jingqingfankui' })
+        })
     }
     .padding(18)
     .width('100%')
@@ -324,19 +332,23 @@ struct zhongtuzhong {
     .margin({ top: 15 });
   }
 
-  @State isRefresh:boolean =false
+  @State isRefresh: boolean = false
 
   build() {
-    Refresh({refreshing:this.isRefresh,promptText:'努力加载中...'}){
-      List(){
-        ForEach(this.datas, (item: TaskBase) =>{ListItem(){this.myItemUI(item)}});
+    Refresh({ refreshing: this.isRefresh, promptText: '努力加载中...' }) {
+      List() {
+        ForEach(this.datas, (item: TaskBase) => {
+          ListItem() { this.myItemUI(item) }
+        });
       }
       .width('100%')
       .height('100%')
       .padding({ left: 15, right: 15 });
-    }.onRefreshing(()=>{this.isRefresh=true
-      setTimeout(()=>{this.isRefresh=false},2000)})
-
+    }
+    .onRefreshing(() => {
+      this.isRefresh = true
+      setTimeout(() => { this.isRefresh = false }, 2000)
+    })
   }
 }
 
@@ -385,7 +397,10 @@ struct chulizhong {
         .backgroundColor('#007AFF')
         .fontColor('#FFFFFF')
         .borderRadius(6)
-        .onClick(() => console.log(`${item.actionText1}：${item.title}`));
+        .onClick(() => {
+          // 跳转至到场反馈页
+          router.pushUrl({ url: 'pages/jingqingchuzhi' })
+        })
     }
     .padding(18)
     .width('100%')
@@ -497,17 +512,25 @@ struct yiwancheng {
   @Builder
   myItemUI(item: TaskBase) {
     Column({ space: 12 }) {
-      Row() {
+      Row({space:15}) {
         Text(item.title)
           .fontSize(18)
           .fontWeight(FontWeight.Bold)
           .fontColor('#333333')
           .flexGrow(1);
-
+        Text('详情>')
+          .fontColor('#0000ff')
+          .fontSize(18)
+          .onClick(() => {
+            // 跳转至到场反馈页
+            router.pushUrl({ url: 'pages/jingqingxiangqing' })
+          })
+      }.justifyContent(FlexAlign.SpaceBetween)
+      .width('100%')
         Text(formatDate(item.createdAt))
           .fontSize(12)
           .fontColor('#999999');
-      }
+
 
       Text(item.contents)
         .fontSize(14)
