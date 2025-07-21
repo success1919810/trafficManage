@@ -31,6 +31,12 @@
     "pages/gongdanxingxi_done",
     "pages/gongdanxingxi_ing",
     "pages/gongdanpingjia",
-    "pages/questionSubmit"
+    "pages/questionSubmit",
+    "pages/yichangwuxiao",
+    "pages/yichangshenpi",
+    "pages/yichangxiangqing",
+    "pages/jixiaoshenpi",
+    "pages/jixiaofankui",
+    "pages/jixiaoxiangqin"
   ]
 }
