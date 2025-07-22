@@ -42,7 +42,7 @@ export struct Workbench {
               }
               .onClick(() => {
                 router.pushUrl({
-                  url: 'pages/xiaoxigonggao', // 目标页面的路由地址
+                  url: 'pages/XiaoXiGongGao/XiaoXiGongGao', // 目标页面的路由地址
                   params: {
                     title: '消息公告' // 可选参数，传递给目标页面
                   }
