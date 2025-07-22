@@ -48,7 +48,19 @@
       "pages/ShenPiGuanLi/jixiaoshenpi",
       "pages/ShenPiGuanLi/jixiaoqueren",
       "pages/ShenPiGuanLi/jixiaofankui",
-      "pages/ShenPiGuanLi/jixiaoxiangqin"
+      "pages/ShenPiGuanLi/jixiaoxiangqin",
+      "pages/JiXiao/JiXiao",
+      "pages/JiXiao/JiXiaoFanKui",
+      "pages/JiXiao/JiXiaoXiangXi",
+      "pages/QingJia/QingJia",
+      "pages/QingJia/QingJiaShengQing",
+      "pages/QingJia/QingJiaXiangXI",
+      "pages/QingJia/QingJiaXiaoJia",
+      "pages/QingJia/QingJiaXiuGai",
+      "pages/YiChangQingWu/YiChang",
+      "pages/YiChangQingWu/YiChangFanKui",
+      "pages/YiChangJingQin/abnormalCaseDetail1",
+      "pages/YiChangJingQin/abnormalCaseFeedBack"
     ]
   }
 }

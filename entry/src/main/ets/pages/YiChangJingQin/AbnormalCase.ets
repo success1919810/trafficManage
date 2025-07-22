@@ -23,13 +23,15 @@ struct AbnormalCase {
             router.back();
           })
 
-        Text('异常勤务')
+        Text('异常警情')
           .fontSize(20)
           // 去掉 bottom margin，避免干扰垂直居中
+
           .margin({ bottom: 0 })
           .textAlign(TextAlign.Center)
           .width('80%')
         Text('<')
+
           .fontSize(26)
           .fontColor('#F2F2F2')
           .margin({bottom:20})
@@ -90,9 +92,9 @@ interface Item1 {
 struct Report {
   // 模拟数据
   datas: Item1[] = [
-    { text1: '异常', text2: '反馈', text3: '异常类型： 脱岗', text4: '执勤点： 内江收费站', text5: '异常日期： 2021-4-11', text6: '状态： 待反馈' },
-    { text1: '异常', text2: '反馈', text3: '异常类型： 脱岗', text4: '执勤点： 内江收费站', text5: '异常日期： 2021-4-11', text6: '状态： 待反馈' },
-    { text1: '异常', text2: '反馈', text3: '异常类型： 脱岗', text4: '执勤点： 内江收费站', text5: '异常日期： 2021-4-11', text6: '状态： 待反馈' },
+    { text1: '超时未签收', text2: '反馈', text3: '异常时间: 2021-4-11 10:25:45', text4: '警情类型：交通事故现场处置', text5: '警情地点：汉安大道中段 25', text6: '状态：有效' },
+    { text1: '超时未签收', text2: '>', text3: '异常时间: 2021-4-11 10:25:45', text4: '警情类型：交通事故现场处置', text5: '警情地点：汉安大道中段 25', text6: '状态：有效' },
+    { text1: '超时未签收', text2: '>', text3: '异常时间: 2021-4-11 10:25:45', text4: '警情类型：交通事故现场处置', text5: '警情地点：汉安大道中段 25', text6: '状态：有效' },
   ];
 
   // 列表项 UI 构建器
@@ -104,9 +106,24 @@ struct Report {
           .fontSize(20)
           .fontColor('#99ff00')
 
-        Text(item.text2)
-          .fontSize(20)
-          .fontColor('#ADD8E6')
+
+          if (item.text2 == '反馈'){
+            Text(item.text2)
+              .fontSize(20)
+              .fontColor('#ADD8E6')
+              .onClick(()=>{
+                router.pushUrl({url:'pages/YiChangJingQin/abnormalCaseFeedBack'})
+              })
+          }
+          else {
+            Text(item.text2)
+              .fontSize(20)
+              .fontColor('#ADD8E6')
+              .onClick(()=>{
+                router.pushUrl({url:'pages/YiChangJingQin/abnormalCaseDetail1'})
+              })
+          }
+
       }.width('100%')
       .justifyContent(FlexAlign.SpaceBetween)
 

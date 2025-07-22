@@ -276,6 +276,14 @@ export struct Workbench {
                 Text('请假管理')
                   .fontSize(14)
               }
+              .onClick(() => {
+                router.pushUrl({
+                  url: 'pages/QingJia/QingJia', // 目标页面的路由地址
+                  params: {
+                    title: '请假管理' // 可选参数，传递给目标页面
+                  }
+                });
+              })
               .width('25%')
 
               Column({ space: 20 }) {
@@ -285,6 +293,14 @@ export struct Workbench {
                 Text('我的效绩')
                   .fontSize(14)
               }
+              .onClick(() => {
+                router.pushUrl({
+                  url: 'pages/JiXiao/JiXiao', // 目标页面的路由地址
+                  params: {
+                    title: '异常勤务' // 可选参数，传递给目标页面
+                  }
+                });
+              })
               .width('25%')
             }
             .width('100%')
@@ -298,6 +314,14 @@ export struct Workbench {
                 Text('异常勤务')
                   .fontSize(14)
               }
+              .onClick(() => {
+                router.pushUrl({
+                  url: 'pages/YiChangQingWu/YiChang', // 目标页面的路由地址
+                  params: {
+                    title: '异常勤务' // 可选参数，传递给目标页面
+                  }
+                });
+              })
               .width('25%')
               Column({ space: 20 }) {
                 Image($r('app.media.work15')) // 统一使用图片a

@@ -1,6 +1,7 @@
 import { mapinindex } from './map';
 import { home } from './home';
 import { Workbench } from './Workbench';
+import { My } from './My';
 
 
 @Entry
@@ -42,7 +43,7 @@ struct Index {
         }.tabBar(this.myTabsBar($r("app.media.map2"), '地图', 2))
 
         TabContent() {
-          Text('1')
+          My()
         }.tabBar(this.myTabsBar($r('app.media.myy'), '我的', 3))
 
       }

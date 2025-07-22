@@ -62,6 +62,18 @@
     "pages/ShiGong/ShigongXiangqing",
     "pages/JiChaBuKong/JichaXiangqing",
     "pages/QinWuPaiBan/QinWuLiShi",
-    "pages/QinWuPaiBan/QinWuXiangQing"
+    "pages/QinWuPaiBan/QinWuXiangQing",
+    "pages/JiXiao/JiXiao",
+    "pages/JiXiao/JiXiaoFanKui",
+    "pages/JiXiao/JiXiaoXiangXi",
+    "pages/QingJia/QingJia",
+    "pages/QingJia/QingJiaShengQing",
+    "pages/QingJia/QingJiaXiangXI",
+    "pages/QingJia/QingJiaXiaoJia",
+    "pages/QingJia/QingJiaXiuGai",
+    "pages/YiChangQingWu/YiChang",
+    "pages/YiChangQingWu/YiChangFanKui",
+    "pages/YiChangJingQin/abnormalCaseDetail1",
+    "pages/YiChangJingQin/abnormalCaseFeedBack"
   ]
 }
