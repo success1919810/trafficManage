@@ -132,7 +132,7 @@ export struct home {
             .height(100)
             .justifyContent(FlexAlign.Center)
             .onClick(() => {
-              router.pushUrl({url:"pages/jingqingrenwu"})// 跳转到警情任务页面
+              router.pushUrl({url:"pages/JingQinRenWu/JingQingRenWu"})// 跳转到警情任务页面
             })
 
             Column() {
@@ -147,7 +147,7 @@ export struct home {
             .justifyContent(FlexAlign.Center)
             .onClick(() => {
               // 跳转到特情任务页面
-              router.pushUrl({url:"pages/teqinrenwu"})
+              router.pushUrl({url:"pages/TeQingRenWu/TeQinRenWu"})
             })
 
             Column() {
@@ -162,7 +162,7 @@ export struct home {
             .justifyContent(FlexAlign.Center)
             .onClick(() => {
               // 跳转到问题上报页面
-              router.pushUrl({url:"pages/exceptionSubmit"})
+              router.pushUrl({url:"pages/WenTiShangBao/QuestionSubmit"})
             })
           }
           .backgroundColor('#ffffff')

@@ -113,7 +113,6 @@ struct PerformanceApproval {
               this.text1 = text;
             }
           })
-          .avoidance(AvoidanceMode.COVER_TARGET)
 
         Select([
           { value: '内江市交警支队一大队' }, { value: '内江市交警支队二大队' },
@@ -136,7 +135,7 @@ struct PerformanceApproval {
               this.text2 = text;
             }
           })
-          .avoidance(AvoidanceMode.COVER_TARGET)
+
 
         Blank()
       }

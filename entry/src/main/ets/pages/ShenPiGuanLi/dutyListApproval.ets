@@ -131,7 +131,6 @@ struct DutyPlanApproval {
                 this.text1 = text;
               }
             })
-            .avoidance(AvoidanceMode.COVER_TARGET)
         }
         // 部门选择
         Row() {
@@ -154,7 +153,6 @@ struct DutyPlanApproval {
                 this.text2 = text;
               }
             })
-            .avoidance(AvoidanceMode.COVER_TARGET)
         }
         Blank()
       }

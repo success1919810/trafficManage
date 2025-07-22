@@ -132,7 +132,6 @@ struct LeaveApproval {
               this.text1 = text;
             }
           })
-          .avoidance(AvoidanceMode.COVER_TARGET)
       }.width('100%').padding(15)
 
       // 状态标签

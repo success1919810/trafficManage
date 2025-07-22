@@ -58,7 +58,6 @@ struct AbnormalCase {
               this.text = text;
             }
           })
-          .avoidance(AvoidanceMode.COVER_TARGET)
       }
       .width('100%')
       .margin({ top: 0 })

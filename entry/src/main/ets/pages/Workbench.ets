@@ -59,7 +59,7 @@ export struct Workbench {
               }
               .onClick(() => {
                 router.pushUrl({
-                  url: 'pages/jingqingrenwu', // 目标页面的路由地址
+                  url: 'pages/JingQinRenWu/JingQingRenWu', // 目标页面的路由地址
                   params: {
                     title: '警情任务' // 可选参数，传递给目标页面
                   }
@@ -186,7 +186,7 @@ export struct Workbench {
               }
               .onClick(() => {
                 router.pushUrl({
-                  url: 'pages/errorSubmit', // 目标页面的路由地址
+                  url: 'pages/GuZhangShangBao/ErrorSubmit', // 目标页面的路由地址
                   params: {
                     title: '警情任务' // 可选参数，传递给目标页面
                   }

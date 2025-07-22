@@ -48,7 +48,6 @@ struct MyReportPage {
               this.text1 = text;
             }
           })
-          .avoidance(AvoidanceMode.COVER_TARGET)
       }
       .width('100%')
       .padding({ left: 10, right: 10 })
@@ -78,7 +77,6 @@ struct MyReportPage {
               this.text2 = text;
             }
           })
-          .avoidance(AvoidanceMode.COVER_TARGET)
       }
       .width('100%')
       .margin({ top: 0 })
