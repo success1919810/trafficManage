@@ -127,6 +127,7 @@ export struct yzhiban {
               }
             });
           })
+
           .fontColor('#ffffff')
           .fontSize(16)
           .padding(5)
@@ -148,6 +149,11 @@ export struct yzhiban {
             .fontColor('#999999')
         }
       }
+      .onClick(() => {
+        router.pushUrl({
+          url: 'pages/QinWuPaiBan/QinWuXiangQing'
+        });
+      })
     }
     .width('100%')
     .padding(20)

@@ -1,3 +1,4 @@
+import router from '@ohos.router';
 interface VehicleInfo {
   licensePlate: string; // 车牌号
   location: string;     // 抓拍地点
@@ -49,6 +50,11 @@ export struct jc1 {
       .justifyContent(FlexAlign.Start)
       .width('100%')
     }
+    .onClick(() => {
+      router.pushUrl({
+        url: 'pages/JiChaBuKong/JichaXiangqing'
+      });
+    })
     .margin({ top: 10 })
     .backgroundColor('#ffffff')
     .borderRadius(10)

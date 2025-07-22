@@ -96,7 +96,7 @@ struct forgetPassword {
           .onClick(() => {
             if (this.phoneNumber && this.verifyCode) {
               router.pushUrl({
-                url: 'pages/setNewPassword',
+                url: 'pages/GuideAndLogin/SetNewPassword',
                 params: { phone: this.phoneNumber }
               });
             } else {

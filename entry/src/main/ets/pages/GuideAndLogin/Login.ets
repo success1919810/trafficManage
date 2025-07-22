@@ -63,7 +63,7 @@ struct Starter {
         .width('90%')
         .onClick(()=>{
           //跳转页面
-          router.pushUrl({url:'pages/forgetPassword'})//清除当前页面
+          router.pushUrl({url:'pages/GuideAndLogin/ForgetPassword'})//清除当前页面
         })
 
     }

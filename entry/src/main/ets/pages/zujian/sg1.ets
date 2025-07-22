@@ -1,3 +1,4 @@
+import router from '@ohos.router';
 // 1. 定义施工信息接口
 interface ConstructionInfo {
   location: string;       // 施工地点
@@ -66,6 +67,11 @@ export struct sg1 {
       .justifyContent(FlexAlign.Start)
       .width('100%')
     }
+    .onClick(() => {
+      router.pushUrl({
+        url: 'pages/ShiGong/ShigongXiangqing'
+      });
+    })
     .margin({ top: 10 })
     .backgroundColor('#ffffff')
     .borderRadius(10)

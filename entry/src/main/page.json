@@ -26,7 +26,29 @@
       "pages/jingqingtuidan",
       "pages/jingqingxiangqing",
       "pages/renwuqianshou",
-      "pages/renwutuihui"
+      "pages/renwutuihui",
+      "pages/ShenPiGuanLi/abnormalServiceListApproval",
+      "pages/ShenPiGuanLi/abnormalCaseListApproval",
+      "pages/ShenPiGuanLi/abnormalServiceConfirm",
+      "pages/ShenPiGuanLi/abnormalServiceDetail",
+      "pages/ShenPiGuanLi/abnormalServiceFeedBack",
+      "pages/ShenPiGuanLi/abnormalServiceApproval",
+      "pages/ShenPiGuanLi/dutyListApproval",
+      "pages/ShenPiGuanLi/dutyPlan",
+      "pages/ShenPiGuanLi/dutyPlanApproval",
+      "pages/ShenPiGuanLi/dutyPlanChange",
+      "pages/ShenPiGuanLi/dutyPlanDetail",
+      "pages/ShenPiGuanLi/dutyRecordApproval",
+      "pages/ShenPiGuanLi/dutyRecordDetail",
+      "pages/ShenPiGuanLi/dutyRecordListApproval",
+      "pages/ShenPiGuanLi/leaveListApproval",
+      "pages/ShenPiGuanLi/leaveApproval",
+      "pages/ShenPiGuanLi/leaveDetail",
+      "pages/ShenPiGuanLi/performanceTestListApproval",
+      "pages/ShenPiGuanLi/jixiaoshenpi",
+      "pages/ShenPiGuanLi/jixiaoqueren",
+      "pages/ShenPiGuanLi/jixiaofankui",
+      "pages/ShenPiGuanLi/jixiaoxiangqin"
     ]
   }
 }
