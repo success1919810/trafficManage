@@ -131,7 +131,7 @@ struct xiaoxi {
     .margin({ top: 20 })
     .shadow({ radius: 3, color: '#00000010' })
     .onClick(()=>{
-      router.pushUrl({url:"pages/xitongxiaoxi"})
+      router.pushUrl({url:"pages/XiaoXiGongGao/XiTongXiaoXi"})
     })
 
   }
@@ -191,7 +191,7 @@ struct gonggao {
     .shadow({ radius: 3, color: '#00000010' })
     .onClick(() => {
       router.pushUrl({
-        url: 'pages/tongzhigonggao', // 目标页面的路由地址
+        url: 'pages/XiaoXiGongGao/TongZhiGongGao', // 目标页面的路由地址
         params: {
           title: '异常上报' // 可选参数，传递给目标页面
         }

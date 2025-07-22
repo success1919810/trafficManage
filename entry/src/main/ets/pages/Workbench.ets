@@ -42,7 +42,7 @@ export struct Workbench {
               }
               .onClick(() => {
                 router.pushUrl({
-                  url: 'pages/xiaoxigonggao', // 目标页面的路由地址
+                  url: 'pages/XiaoXiGongGao/XiaoXiGongGao', // 目标页面的路由地址
                   params: {
                     title: '消息公告' // 可选参数，传递给目标页面
                   }
@@ -164,9 +164,17 @@ export struct Workbench {
                 Image($r('app.media.work7')) // 统一使用图片a
                   .width(40)
                   .height(40)
-                Text('占道停车')
+                Text('问题上报')
                   .fontSize(14)
               }
+              .onClick(() => {
+                router.pushUrl({
+                  url: 'pages/questionSubmit', // 目标页面的路由地址
+                  params: {
+                    title: '警情任务' // 可选参数，传递给目标页面
+                  }
+                });
+              })
               .width('25%')
 
               Column({ space: 20 }) {

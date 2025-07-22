@@ -42,7 +42,10 @@ struct Qinwushenqing {
       this.time = params.time;
     }
   }
-
+  @StorageProp('bottomRectHeight')
+  bottomRectHeight:number = 0;
+  @StorageProp('topRectHeight')
+  topRectHeight:number = 0;
   build() {
     Column() {
       Stack(){
@@ -185,6 +188,9 @@ struct Qinwushenqing {
             .borderRadius(5)
         }
       }.padding(16)
-    }.width('100%')
+    }
+    .padding({top: px2vp(this.topRectHeight),bottom:px2vp(this.bottomRectHeight)})
+    .width('100%')
+    .height('100%')
   }
 }

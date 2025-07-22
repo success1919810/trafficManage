@@ -30,7 +30,10 @@ struct Qinwutijiao {
       this.time = params.time;
     }
   }
-
+  @StorageProp('bottomRectHeight')
+  bottomRectHeight:number = 0;
+  @StorageProp('topRectHeight')
+  topRectHeight:number = 0;
   build() {
     Column() {
       Stack(){
@@ -187,6 +190,9 @@ struct Qinwutijiao {
             .borderRadius(5)
         }
       }.padding(16)
-    }.width('100%')
+    }
+    .padding({top: px2vp(this.topRectHeight),bottom:px2vp(this.bottomRectHeight)})
+    .width('100%')
+    .height('100%')
   }
 }

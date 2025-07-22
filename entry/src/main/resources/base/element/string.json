@@ -11,6 +11,18 @@
     {
       "name": "EntryAbility_label",
       "value": "label"
+    },
+    {
+      "name": "location_reason",
+      "value": "获取位置"
+    },
+    {
+      "name": "internet_reason",
+      "value": "获取网络"
+    },
+    {
+      "name": "approximately_location_reason",
+      "value": "用于获取模糊定位"
     }
   ]
 }
