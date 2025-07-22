@@ -76,7 +76,7 @@ export struct Workbench {
               }
               .onClick(() => {
                 router.pushUrl({
-                  url: 'pages/teqinrenwu', // 目标页面的路由地址
+                  url: 'pages/TeQingRenWu/TeQinRenWu', // 目标页面的路由地址
                   params: {
                     title: '特勤任务' // 可选参数，传递给目标页面
                   }
@@ -93,9 +93,9 @@ export struct Workbench {
               }
               .onClick(() => {
                 router.pushUrl({
-                  url: 'pages/qinwu', // 目标页面的路由地址
+                  url: 'pages/QinWuPaiBan/QinWu', // 目标页面的路由地址
                   params: {
-                    title: '特勤任务' // 可选参数，传递给目标页面
+                    title: '勤务排班' // 可选参数，传递给目标页面
                   }
                 });
               })
@@ -135,7 +135,7 @@ export struct Workbench {
               }
               .onClick(() => {
                 router.pushUrl({
-                  url: 'pages/shigong', // 目标页面的路由地址
+                  url: 'pages/ShiGong/ShiGong', // 目标页面的路由地址
                   params: {
                     title: '特勤任务' // 可选参数，传递给目标页面
                   }
@@ -152,7 +152,7 @@ export struct Workbench {
               }
               .onClick(() => {
                 router.pushUrl({
-                  url: 'pages/jicha', // 目标页面的路由地址
+                  url: 'pages/JiChaBuKong/JiCha', // 目标页面的路由地址
                   params: {
                     title: '特勤任务' // 可选参数，传递给目标页面
                   }
@@ -169,7 +169,7 @@ export struct Workbench {
               }
               .onClick(() => {
                 router.pushUrl({
-                  url: 'pages/questionSubmit', // 目标页面的路由地址
+                  url: 'pages/WenTiShangBao/QuestionSubmit', // 目标页面的路由地址
                   params: {
                     title: '警情任务' // 可选参数，传递给目标页面
                   }
@@ -207,7 +207,7 @@ export struct Workbench {
               }
               .onClick(() => {
                 router.pushUrl({
-                  url: 'pages/exceptionSubmit', // 目标页面的路由地址
+                  url: 'pages/YiChangShangBao/ExceptionSubmit', // 目标页面的路由地址
                   params: {
                     title: '异常上报' // 可选参数，传递给目标页面
                   }
@@ -241,21 +241,15 @@ export struct Workbench {
                 Image($r('app.media.work10')) // 统一使用图片a
                   .width(40)
                   .height(40)
-                  .onClick(() => {
-                    // 点击后跳转到审批管理页面
-                    router.pushUrl({
-                      url: 'pages/ApprovalManagement' // 根据你的路由配置修改路径
-                    });
-                  })
                 Text('审批管理')
                   .fontSize(14)
-                  .onClick(() => {
-                    // 点击后跳转到审批管理页面
-                    router.pushUrl({
-                      url: 'pages/ApprovalManagement' // 根据你的路由配置修改路径
-                    });
-                  })
               }
+              .onClick(() => {
+                // 点击后跳转到审批管理页面
+                router.pushUrl({
+                  url: 'pages/ShenPiGuanLi/ApprovalManagement' // 根据你的路由配置修改路径
+                });
+              })
               .width('25%') // 占每行四分之一宽度
 
               Column({ space: 20 }) {
@@ -267,7 +261,7 @@ export struct Workbench {
               }
               .onClick(() => {
                 router.pushUrl({
-                  url: 'pages/MyReport', // 目标页面的路由地址
+                  url: 'pages/WoDeShangBao/MyReport', // 目标页面的路由地址
                   params: {
                     title: '我的上报' // 可选参数，传递给目标页面
                   }
@@ -314,7 +308,7 @@ export struct Workbench {
               }
               .onClick(() => {
                 router.pushUrl({
-                  url: 'pages/abnormalCase', // 目标页面的路由地址
+                  url: 'pages/YiChangJingQin/AbnormalCase', // 目标页面的路由地址
                   params: {
                     title: '异常警情' // 可选参数，传递给目标页面
                   }

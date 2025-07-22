@@ -230,7 +230,7 @@ struct daiqianshou {
           .borderRadius(6)
           .onClick(() => {
             // 跳转至签收详情页
-            router.pushUrl({ url: 'pages/jingqingqianshou' })
+            router.pushUrl({ url: 'pages/JingQinRenWu/JingQingQianShou' })
           })
 
         Button(item.actionText2)
@@ -242,7 +242,7 @@ struct daiqianshou {
           .borderRadius(6)
           .onClick(() => {
             // 跳转至退回原因填写页
-            router.pushUrl({ url: 'pages/jingqingtuidan' })
+            router.pushUrl({ url: 'pages/JingQinRenWu/JingQingTuiDan' })
           });
       }
       .width('100%')
@@ -321,7 +321,7 @@ struct zhongtuzhong {
         .borderRadius(6)
         .onClick(() => {
           // 跳转至到场反馈页
-          router.pushUrl({ url: 'pages/jingqingfankui' })
+          router.pushUrl({ url: 'pages/JingQinRenWu/JingQingFanKui' })
         })
     }
     .padding(18)
@@ -399,7 +399,7 @@ struct chulizhong {
         .borderRadius(6)
         .onClick(() => {
           // 跳转至到场反馈页
-          router.pushUrl({ url: 'pages/jingqingchuzhi' })
+          router.pushUrl({ url: 'pages/JingQinRenWu/JingQingChuZhi' })
         })
     }
     .padding(18)
@@ -523,7 +523,7 @@ struct yiwancheng {
           .fontSize(18)
           .onClick(() => {
             // 跳转至到场反馈页
-            router.pushUrl({ url: 'pages/jingqingxiangqing' })
+            router.pushUrl({ url: 'pages/JingQinRenWu/JingQingXiangQing' })
           })
       }.justifyContent(FlexAlign.SpaceBetween)
       .width('100%')

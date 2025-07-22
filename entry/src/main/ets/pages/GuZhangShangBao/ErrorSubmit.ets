@@ -149,7 +149,7 @@ struct daichuli {
     .padding(20)
     .borderRadius(15)
     .onClick(() => {
-      router.pushUrl({ url: "pages/gongdanxingxi" })
+      router.pushUrl({ url: "pages/GuZhangShangBao/GongDanXingXi" })
     })
   }
 
@@ -230,7 +230,7 @@ struct chulihzong {
     .padding(20)
     .borderRadius(15)
     .onClick(() => {
-      router.pushUrl({ url: "pages/gongdanxingxi_ing" })
+      router.pushUrl({ url: "pages/GuZhangShangBao/GongDanXingXiIng" })
     })
   }
 
@@ -283,7 +283,7 @@ struct daipingjia {
     .padding(20)
     .borderRadius(15)
     .onClick(() => {
-      router.pushUrl({ url: "pages/gongdanxingxi_done" })
+      router.pushUrl({ url: "pages/GuZhangShangBao/GongDanXingXiDone" })
     })
   }
 
@@ -336,7 +336,7 @@ struct yiwancheng {
     .padding(20)
     .borderRadius(15)
     .onClick(() => {
-      router.pushUrl({ url: "pages/gongdanxingxi_finish" })
+      router.pushUrl({ url: "pages/GuZhangShangBao/GongDanXingXiComment" })
     })
   }
 

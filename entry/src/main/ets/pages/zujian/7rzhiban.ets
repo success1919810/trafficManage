@@ -96,7 +96,7 @@ export struct rzhiban {
           Text('申请调整')
             .onClick(() => {
               router.pushUrl({
-                url: 'pages/qinwushenqing', // 目标页面的路由地址
+                url: 'pages/QinWuPaiBan/QinWuShenQing', // 目标页面的路由地址
                 params: {
                   date:item.date,
                   location: item.location,
@@ -117,7 +117,7 @@ export struct rzhiban {
         Text('提交值班')
           .onClick(() => {
             router.pushUrl({
-              url: 'pages/qinwutijiao', // 目标页面的路由地址
+              url: 'pages/QinWuPaiBan/QinWuTiJiao', // 目标页面的路由地址
               params: {
                 date:item.date,
                 location: item.location,

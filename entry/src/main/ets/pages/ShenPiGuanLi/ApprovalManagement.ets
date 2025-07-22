@@ -96,6 +96,22 @@ struct ApprovalManagement {
               .width('10%')
           }.backgroundColor('#ffffff').width('100%').height(50).justifyContent(FlexAlign.SpaceBetween)
           Row().height(2).backgroundColor('#F2F2F2').width('100%')
+          Row(){
+            Text('异常警情审批')
+              .fontSize(20)
+              .margin({ bottom: 0, left: 10 }) // 左侧留 10px 空隙，可按需调整数值
+              .width('80%')
+            Text('>')
+              .fontSize(30)
+              .fontColor('#ADD8E6')
+              .margin({ bottom: 0 })
+              .textAlign(TextAlign.Center)
+              .width('10%')
+              .onClick(()=>{
+                router.pushUrl({url:"pages/ShenPiGuanLi/YiChangJingQinShenPi/YiChangJingQinShenPiList"})
+              })
+          }.backgroundColor('#ffffff').width('100%').height(50).justifyContent(FlexAlign.SpaceBetween)
+          Row().height(2).backgroundColor('#F2F2F2').width('100%')
     }
         .width('100%')
         .height('100%')

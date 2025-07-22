@@ -157,7 +157,7 @@ struct daiqianshou {
               .borderRadius(6)
               .onClick(() => {
                 // 跳转至到场反馈页
-                router.pushUrl({ url: 'pages/renwuqianshou' })
+                router.pushUrl({ url: 'pages/TeQingRenWu/RenWuQianShou' })
               })
 
             Button(item.actionText2)
@@ -169,7 +169,7 @@ struct daiqianshou {
               .borderRadius(6)
               .onClick(() => {
                 // 跳转至到场反馈页
-                router.pushUrl({ url: 'pages/renwutuihui' })
+                router.pushUrl({ url: 'pages/TeQingRenWu/RenWuTuiHui' })
               })
           }
         }
