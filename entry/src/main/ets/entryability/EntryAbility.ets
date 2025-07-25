@@ -35,7 +35,7 @@ export default class EntryAbility extends UIAbility {
     let topRectHeight = avoidArea.topRect.height; // 获取状态栏区域高度
     AppStorage.setOrCreate('topRectHeight', topRectHeight);
 
-    windowStage.loadContent('pages/Index', (err) => {//写页名即可
+    windowStage.loadContent('pages/GuideAndLogin/Login', (err) => {//写页名即可
       if (err.code) {
         hilog.error(DOMAIN, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err));
         return;
