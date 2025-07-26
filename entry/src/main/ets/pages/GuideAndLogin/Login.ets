@@ -4,7 +4,7 @@ import { postJsonLogin } from '../../utils/HttpLoginService';
 
 // 定义接口类型
 interface LoginRequest {
-  username: string;
+  account: string;
   password: string;
 }
 
@@ -38,7 +38,7 @@ struct Starter {
 
     try {
       const requestData: LoginRequest = {
-        username: this.account,
+        account: this.account,
         password: this.password
       };
 
@@ -67,7 +67,7 @@ struct Starter {
           .margin({top:30})
       }.margin({ top:10,bottom: 30 })
 
-      TextInput({ placeholder: '请输入账号' })
+      TextInput({ placeholder: '请输入账号或手机号' })
         .type(InputType.Normal)
         .margin({ bottom: 15 })
         .height('50')

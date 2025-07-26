@@ -52,7 +52,7 @@ struct forgetPassword {
         phone: this.phoneNumber
       };
 
-      const result = await postJsonLogin<ForgetResult>('http://26.195.0.245:8080/login/foget', forgetRequest);
+      const result = await postJsonLogin<ForgetResult>('http://26.195.0.245:8080/login/forget', forgetRequest);
 
       if (result.code === 200) {
         // 手机号存在，模拟发送验证码
@@ -96,7 +96,7 @@ struct forgetPassword {
         phone: this.phoneNumber
       };
 
-      const result = await postJsonLogin<ForgetResult>('http://26.195.0.245:8080/login/foget', forgetRequest);
+      const result = await postJsonLogin<ForgetResult>('http://26.195.0.245:8080/login/forget', forgetRequest);
 
       if (result.code === 200) {
         promptAction.showToast({ message: '验证成功' });
