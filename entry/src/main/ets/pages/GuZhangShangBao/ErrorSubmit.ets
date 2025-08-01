@@ -1,14 +1,8 @@
 import router from '@ohos.router';
 import { Prompt } from '@kit.ArkUI';
+import {WorkOrderStatus,WorkOrderItem,ApiResponse} from "../../utils/ErrorSubmitType"
+import {errorSubmitService} from "../../utils/ErrorSubmitService"
 
-// 统一的数据接口
-interface WorkOrderItem {
-  text1: string
-  text2: string
-  text3: string
-  text4: string
-  text5: string
-}
 
 @Entry
 @Component
@@ -104,42 +98,51 @@ struct ErrorSubmit {
   }
 }
 
-// 统一的数据源
-const commonData: WorkOrderItem[] = [
-  { text1: '高点球机 - BH58Z1', text2: '故障类型：未知离线', text3: '设备位置：市中区汉安大道 988 号', text4: '报修时间：2021 年 7 月 1 日 11:08:22', text5: '报修人：刘全' },
-  { text1: '普通枪机 - BH3356', text2: '故障类型：未知离线', text3: '设备位置：市中区汉安大道 988 号', text4: '报修时间：2021 年 7 月 1 日 11:08:22', text5: '报修人：刘全' },
-  { text1: '高点球机 - BH58Z1', text2: '故障类型：未知离线', text3: '设备位置：市中区汉安大道 988 号', text4: '报修时间：2021 年 7 月 1 日 11:08:22', text5: '报修人：刘全' },
-  { text1: '高点球机 - BH58Z1', text2: '故障类型：未知离线', text3: '设备位置：市中区汉安大道 988 号', text4: '报修时间：2021 年 7 月 1 日 11:08:22', text5: '报修人：刘全' },
-  { text1: '高点球机 - BH58Z1', text2: '故障类型：未知离线', text3: '设备位置：市中区汉安大道 988 号', text4: '报修时间：2021 年 7 月 1 日 11:08:22', text5: '报修人：刘全' },
-]
-
 @Component
 struct daichuli {
   @State Refresh: boolean = false;
   @State Loading: boolean = false;
-  datas: WorkOrderItem[] = commonData
+  @State workOrder: WorkOrderItem[] = []
+
+  async fetchData() {
+    this.Loading = true
+    try {
+      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/pending")
+      if (result.code === 200) {
+        this.workOrder = result.data as WorkOrderItem[]
+      }
+    } catch (error) {
+      console.error('获取数据失败:', error)
+    } finally {
+      this.Loading = false
+    }
+  }
+
+  aboutToAppear() {
+    this.fetchData()
+  }
 
   @Builder
   myItemUI(item: WorkOrderItem) {
     Column({ space: 10 }) {
-      Text(item.text1)
+      Text(`${item.equipmentType} - ${item.equipmentCode}`)
         .fontSize(20)
         .fontWeight(10)
         .width('100%')
 
-      Text(item.text2)
+      Text(`故障类型：${item.faultType}`)
         .width('100%')
         .fontColor('#666666')
 
-      Text(item.text3)
+      Text(`设备位置：${item.location}`)
         .width('100%')
         .fontColor('#666666')
 
-      Text(item.text4)
+      Text(`报修时间：${item.reportTime}`)
         .width('100%')
         .fontColor('#666666')
 
-      Text(item.text5)
+      Text(`报修人：${item.reporterName}`)
         .width('100%')
         .fontColor('#666666')
     }
@@ -149,7 +152,10 @@ struct daichuli {
     .padding(20)
     .borderRadius(15)
     .onClick(() => {
-      router.pushUrl({ url: "pages/GuZhangShangBao/GongDanXingXi" })
+      router.pushUrl({
+        url: "pages/GuZhangShangBao/GongDanXingXi",
+        params: { orderId: item.id, orderData: item }
+      })
     })
   }
 
@@ -157,7 +163,7 @@ struct daichuli {
     Column() {
       Refresh({ refreshing: this.Refresh, promptText: '正在加载中' }) {
         List() {
-          ForEach(this.datas, (item: WorkOrderItem) => {
+          ForEach(this.workOrder, (item: WorkOrderItem) => {
             ListItem() {
               this.myItemUI(item)
             }
@@ -175,7 +181,7 @@ struct daichuli {
           }
         }
         .onScrollIndex((start: number, end: number) => {
-          if (end == this.datas.length - 1 && this.Loading == false) {
+          if (end == this.workOrder.length - 1 && this.Loading == false) {
             this.Loading = true
             setTimeout(() => {
               this.Loading = false
@@ -185,6 +191,7 @@ struct daichuli {
       }
       .onRefreshing(() => {
         this.Refresh = true
+        this.fetchData()
         setTimeout(() => {
           this.Refresh = false
         }, 2000)
@@ -198,29 +205,44 @@ struct daichuli {
 
 @Component
 struct chulihzong {
-  datas: WorkOrderItem[] = commonData
+  @State workOrder: WorkOrderItem[] = []
+
+  async fetchData() {
+    try {
+      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/processing")
+      if (result.code === 200) {
+        this.workOrder = result.data as WorkOrderItem[]
+      }
+    } catch (error) {
+      console.error('获取数据失败:', error)
+    }
+  }
+
+  aboutToAppear() {
+    this.fetchData()
+  }
 
   @Builder
   myItemUI(item: WorkOrderItem) {
     Column({ space: 10 }) {
-      Text(item.text1)
+      Text(`${item.equipmentType} - ${item.equipmentCode}`)
         .fontSize(20)
         .fontWeight(10)
         .width('100%')
 
-      Text(item.text2)
+      Text(`故障类型：${item.faultType}`)
         .width('100%')
         .fontColor('#666666')
 
-      Text(item.text3)
+      Text(`设备位置：${item.location}`)
         .width('100%')
         .fontColor('#666666')
 
-      Text(item.text4)
+      Text(`报修时间：${item.reportTime}`)
         .width('100%')
         .fontColor('#666666')
 
-      Text(item.text5)
+      Text(`报修人：${item.reporterName}`)
         .width('100%')
         .fontColor('#666666')
     }
@@ -230,14 +252,17 @@ struct chulihzong {
     .padding(20)
     .borderRadius(15)
     .onClick(() => {
-      router.pushUrl({ url: "pages/GuZhangShangBao/GongDanXingXiIng" })
+      router.pushUrl({
+        url: "pages/GuZhangShangBao/GongDanXingXiIng",
+        params: { orderId: item.id, orderData: item }
+      })
     })
   }
 
   build() {
     Column() {
       List() {
-        ForEach(this.datas, (item: WorkOrderItem) => {
+        ForEach(this.workOrder, (item: WorkOrderItem) => {
           ListItem() {
             this.myItemUI(item)
           }
@@ -251,29 +276,44 @@ struct chulihzong {
 
 @Component
 struct daipingjia {
-  datas: WorkOrderItem[] = commonData
+  @State workOrder: WorkOrderItem[] = []
+
+  async fetchData() {
+    try {
+      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/completed")
+      if (result.code === 200) {
+        this.workOrder = result.data as WorkOrderItem[]
+      }
+    } catch (error) {
+      console.error('获取数据失败:', error)
+    }
+  }
+
+  aboutToAppear() {
+    this.fetchData()
+  }
 
   @Builder
   myItemUI(item: WorkOrderItem) {
     Column({ space: 10 }) {
-      Text(item.text1)
+      Text(`${item.equipmentType} - ${item.equipmentCode}`)
         .fontSize(20)
         .fontWeight(10)
         .width('100%')
 
-      Text(item.text2)
+      Text(`故障类型：${item.faultType}`)
         .width('100%')
         .fontColor('#666666')
 
-      Text(item.text3)
+      Text(`设备位置：${item.location}`)
         .width('100%')
         .fontColor('#666666')
 
-      Text(item.text4)
+      Text(`报修时间：${item.reportTime}`)
         .width('100%')
         .fontColor('#666666')
 
-      Text(item.text5)
+      Text(`报修人：${item.reporterName}`)
         .width('100%')
         .fontColor('#666666')
     }
@@ -283,14 +323,17 @@ struct daipingjia {
     .padding(20)
     .borderRadius(15)
     .onClick(() => {
-      router.pushUrl({ url: "pages/GuZhangShangBao/GongDanXingXiDone" })
+      router.pushUrl({
+        url: "pages/GuZhangShangBao/GongDanXingXiDone",
+        params: { orderId: item.id, orderData: item }
+      })
     })
   }
 
   build() {
     Column() {
       List() {
-        ForEach(this.datas, (item: WorkOrderItem) => {
+        ForEach(this.workOrder, (item: WorkOrderItem) => {
           ListItem() {
             this.myItemUI(item)
           }
@@ -304,29 +347,44 @@ struct daipingjia {
 
 @Component
 struct yiwancheng {
-  datas: WorkOrderItem[] = commonData
+  @State workOrder: WorkOrderItem[] = []
+
+  async fetchData() {
+    try {
+      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/evaluated")
+      if (result.code === 200) {
+        this.workOrder = result.data as WorkOrderItem[]
+      }
+    } catch (error) {
+      console.error('获取数据失败:', error)
+    }
+  }
+
+  aboutToAppear() {
+    this.fetchData()
+  }
 
   @Builder
   myItemUI(item: WorkOrderItem) {
     Column({ space: 10 }) {
-      Text(item.text1)
+      Text(`${item.equipmentType} - ${item.equipmentCode}`)
         .fontSize(20)
         .fontWeight(10)
         .width('100%')
 
-      Text(item.text2)
+      Text(`故障类型：${item.faultType}`)
         .width('100%')
         .fontColor('#666666')
 
-      Text(item.text3)
+      Text(`设备位置：${item.location}`)
         .width('100%')
         .fontColor('#666666')
 
-      Text(item.text4)
+      Text(`报修时间：${item.reportTime}`)
         .width('100%')
         .fontColor('#666666')
 
-      Text(item.text5)
+      Text(`报修人：${item.reporterName}`)
         .width('100%')
         .fontColor('#666666')
     }
@@ -336,14 +394,17 @@ struct yiwancheng {
     .padding(20)
     .borderRadius(15)
     .onClick(() => {
-      router.pushUrl({ url: "pages/GuZhangShangBao/GongDanXingXiComment" })
+      router.pushUrl({
+        url: "pages/GuZhangShangBao/GongDanXingXiComment",
+        params: { orderId: item.id, orderData: item }
+      })
     })
   }
 
   build() {
     Column() {
       List() {
-        ForEach(this.datas, (item: WorkOrderItem) => {
+        ForEach(this.workOrder, (item: WorkOrderItem) => {
           ListItem() {
             this.myItemUI(item)
           }
