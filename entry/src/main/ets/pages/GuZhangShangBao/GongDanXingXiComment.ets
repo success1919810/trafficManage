@@ -1,4 +1,5 @@
 import router from '@ohos.router';
+import {WorkOrderItem,WorkOrderHistoryItem} from '../../utils/ErrorSubmitType'
 
 @Entry
 @Component
@@ -7,6 +8,14 @@ struct Gongdanxingxi {
   bottomRectHeight: number = 0;
   @StorageProp('topRectHeight')
   topRectHeight: number = 0;
+  @State
+  orderData:WorkOrderItem={} as WorkOrderItem
+  aboutToAppear() {
+    const params = router.getParams() as Record<string, WorkOrderItem>;
+    if (params && typeof params.orderData === 'object') {
+      this.orderData = params.orderData as WorkOrderItem;
+    }
+  }
 
   build() {
     Column() {
@@ -35,20 +44,20 @@ struct Gongdanxingxi {
       Scroll() {
         Column() {
           // 工单信息项
-          this.InfoItem('工单编号', 'No.20210701')
-          this.InfoItem('设备类型', '高点球机-BH58Z1')
-          this.InfoItem('设备位置', '市中区汉安大道988号')
-          this.InfoItem('设备负责人', '胡艺嘉')
-          this.InfoItem('联系电话', '18284305569')
-          this.InfoItem('报修人', '刘全')
-          this.InfoItem('报修时间', '2021年7月1日11:18:22')
-          this.InfoItem('工单状态', '待处理')
-          this.InfoItem('故障类型', '未知离线')
+          this.InfoItem('工单编号', this.orderData.orderNo)
+          this.InfoItem('设备类型', this.orderData.equipmentType+this.orderData.equipmentCode)
+          this.InfoItem('设备位置', this.orderData.location)
+          this.InfoItem('设备负责人', this.orderData.responsiblePerson)
+          this.InfoItem('联系电话', this.orderData.contactPhone)
+          this.InfoItem('报修人', this.orderData.reporterName)
+          this.InfoItem('报修时间', this.orderData.reportTime)
+          this.InfoItem('工单状态', this.orderData.status)
+          this.InfoItem('故障类型', this.orderData.faultType)
 
           // 新增的信息项
-          this.InfoItem('运维人员', '刘力')
-          this.InfoItem('处理时间', '2021年7月1日15:43:38')
-          this.InfoItem('完成时间', '2021年7月1日16:57:31')
+          this.InfoItem('运维人员', this.orderData.maintenancePerson)
+          this.InfoItem('处理时间', this.orderData.processTime)
+          this.InfoItem('完成时间', this.orderData.completeTime)
 
           // 故障描述
           Column() {
@@ -83,15 +92,15 @@ struct Gongdanxingxi {
             .margin({ bottom: 15 })
 
             Row() {
-              ForEach([1, 2, 3], (item: number) => {
+              ForEach(this.orderData.faultImages ?? [], (item: string, index: number) => {
                 Column() {
-                  Image($r('app.media.1'))
+                  Image(item) // 正确加载网络图片
                     .width(80)
                     .height(80)
-                    .backgroundColor('#E8F4FD')
+                    .objectFit(ImageFit.Cover)
                     .borderRadius(8)
                 }
-                .margin({ right: item < 3 ? 15 : 0 })
+                .margin({ right: index < (this.orderData.faultImages.length - 1) ? 15 : 0 })
               })
             }
             .width('100%')
@@ -112,15 +121,15 @@ struct Gongdanxingxi {
             .margin({ bottom: 15 })
 
             Row() {
-              ForEach([1, 2, 3], (item: number) => {
+              ForEach(this.orderData.sceneImages ?? [], (item: string, index: number) => {
                 Column() {
-                  Image($r('app.media.1'))
+                  Image(item) // 正确加载网络图片
                     .width(80)
                     .height(80)
-                    .backgroundColor('#E8F4FD')
+                    .objectFit(ImageFit.Cover)
                     .borderRadius(8)
                 }
-                .margin({ right: item < 3 ? 15 : 0 })
+                .margin({ right: index < (this.orderData.faultImages.length - 1) ? 15 : 0 })
               })
             }
             .width('100%')
@@ -137,7 +146,7 @@ struct Gongdanxingxi {
                 .fontColor('#333333')
               Blank()
               Row() {
-                ForEach([1, 2, 3, 4, 5], (item: number) => {
+                ForEach(Array.from<number, number>({length: this.orderData.rating}, (_: number, index: number) => index + 1), (item: number) => {
                   Text('★')
                     .fontSize(20)
                     .fontColor('#FFD700')
@@ -161,7 +170,7 @@ struct Gongdanxingxi {
             .width('100%')
             .margin({ bottom: 8 })
 
-            Text('本次运维响应及时，维修质量在线，提出表扬')
+            Text(this.orderData.evaluationComment)
               .fontSize(14)
               .fontColor('#666666')
               .textAlign(TextAlign.Start)
@@ -184,11 +193,13 @@ struct Gongdanxingxi {
 
             // 历史记录列表
             Column() {
-              this.HistoryItem('已评价', '报修人刘全完成评价', '2021年7月1日16:09:06')
-              this.HistoryItem('已完成', '运维人员刘力完成故障维修', '2021年7月1日15:09:06')
-              this.HistoryItem('处理中', '运维人员刘力进行故障维修', '2021年7月1日14:00:06')
-              this.HistoryItem('已接单', '运维人员刘力接单', '2021年7月1日13:15:05')
-              this.HistoryItem('派单', '报修人刘全完成工单', '2021年7月1日13:09:06')
+              ForEach(this.orderData.workOrderHistory, (item: WorkOrderHistoryItem) => {
+                this.HistoryItem(
+                  item.status,
+                  item.description,
+                  item.createdAt,
+                )
+              })
             }
           }
           .alignItems(HorizontalAlign.Start)

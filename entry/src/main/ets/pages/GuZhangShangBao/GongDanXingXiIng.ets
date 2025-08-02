@@ -1,4 +1,5 @@
 import router from '@ohos.router';
+import {WorkOrderItem} from '../../utils/ErrorSubmitType'
 
 @Entry
 @Component
@@ -7,6 +8,14 @@ struct Gongdanxingxi {
   bottomRectHeight: number = 0;
   @StorageProp('topRectHeight')
   topRectHeight: number = 0;
+  @State
+  orderData:WorkOrderItem={} as WorkOrderItem
+  aboutToAppear() {
+    const params = router.getParams() as Record<string, WorkOrderItem>;
+    if (params && typeof params.orderData === 'object') {
+      this.orderData = params.orderData as WorkOrderItem;
+    }
+  }
 
   build() {
     Column() {
@@ -35,15 +44,15 @@ struct Gongdanxingxi {
       Scroll() {
         Column() {
           // 工单信息项
-          this.InfoItem('工单编号', 'No.20210701')
-          this.InfoItem('设备类型', '高点球机-BH58Z1')
-          this.InfoItem('设备位置', '市中区汉安大道988号')
-          this.InfoItem('设备负责人', '胡艺嘉')
-          this.InfoItem('联系电话', '18284305569')
-          this.InfoItem('报修人', '刘全')
-          this.InfoItem('报修时间', '2021年7月1日11:18:22')
-          this.InfoItem('工单状态', '待处理')
-          this.InfoItem('故障类型', '未知离线')
+          this.InfoItem('工单编号', this.orderData.orderNo)
+          this.InfoItem('设备类型', this.orderData.equipmentType+this.orderData.equipmentCode)
+          this.InfoItem('设备位置', this.orderData.location)
+          this.InfoItem('设备负责人', this.orderData.responsiblePerson)
+          this.InfoItem('联系电话', this.orderData.contactPhone)
+          this.InfoItem('报修人', this.orderData.reporterName)
+          this.InfoItem('报修时间', this.orderData.reportTime)
+          this.InfoItem('工单状态', this.orderData.status)
+          this.InfoItem('故障类型', this.orderData.faultType)
 
 
           // 故障描述
@@ -96,8 +105,8 @@ struct Gongdanxingxi {
           .width('100%')
           .padding({ left: 20, right: 20, top: 15, bottom: 15 })
 
-          this.InfoItem('运维人员', '刘力')
-          this.InfoItem('接单时间', '2021年7月1日15:43:38')
+          this.InfoItem('运维人员', this.orderData.maintenancePerson)
+          this.InfoItem('接单时间', this.orderData.processTime)
 
         }
       }

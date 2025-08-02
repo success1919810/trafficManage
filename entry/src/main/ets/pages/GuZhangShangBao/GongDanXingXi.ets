@@ -1,4 +1,5 @@
 import router from '@ohos.router';
+import {WorkOrderItem,ApiResponse} from "../../utils/ErrorSubmitType"
 
 @Entry
 @Component
@@ -7,7 +8,14 @@ struct Gongdanxingxi {
   bottomRectHeight: number = 0;
   @StorageProp('topRectHeight')
   topRectHeight: number = 0;
-
+  @State
+  orderData:WorkOrderItem={} as WorkOrderItem
+  aboutToAppear() {
+    const params = router.getParams() as Record<string, WorkOrderItem>;
+    if (params && typeof params.orderData === 'object') {
+      this.orderData = params.orderData as WorkOrderItem;
+    }
+  }
   build() {
     Column() {
       // 顶部导航栏
@@ -34,15 +42,15 @@ struct Gongdanxingxi {
       // 工单详情内容
       Column() {
         // 工单信息项
-        this.InfoItem('工单编号', 'No.20210701')
-        this.InfoItem('设备类型', '高点球机-BH58Z1')
-        this.InfoItem('设备位置', '市中区汉安大道988号')
-        this.InfoItem('设备负责人', '胡艺嘉')
-        this.InfoItem('联系电话', '18284305569')
-        this.InfoItem('报修人', '刘全')
-        this.InfoItem('报修时间', '2021年7月1日11:18:22')
-        this.InfoItem('工单状态', '待处理')
-        this.InfoItem('故障类型', '未知离线')
+        this.InfoItem('工单编号',this.orderData.orderNo )
+        this.InfoItem('设备类型', this.orderData.equipmentCode+this.orderData.equipmentType)
+        this.InfoItem('设备位置', this.orderData.location)
+        this.InfoItem('设备负责人', this.orderData.responsiblePerson)
+        this.InfoItem('联系电话', this.orderData.contactPhone)
+        this.InfoItem('报修人', this.orderData.reporterName)
+        this.InfoItem('报修时间', this.orderData.reportTime)
+        this.InfoItem('工单状态', this.orderData.status)
+        this.InfoItem('故障类型', this.orderData.faultType)
 
 
 
@@ -79,15 +87,15 @@ struct Gongdanxingxi {
           .margin({ bottom: 15 })
 
           Row() {
-            ForEach([1, 2, 3], (item: number) => {
+            ForEach(this.orderData.faultImages ?? [], (item: string, index: number) => {
               Column() {
-                Image($r('app.media.1'))
+                Image(item) // 正确加载网络图片
                   .width(80)
                   .height(80)
-                  .backgroundColor('#E8F4FD')
+                  .objectFit(ImageFit.Cover)
                   .borderRadius(8)
               }
-              .margin({ right: item < 3 ? 15 : 0 })
+              .margin({ right: index < (this.orderData.faultImages.length - 1) ? 15 : 0 })
             })
           }
           .width('100%')

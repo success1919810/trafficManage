@@ -1,8 +1,8 @@
+
 import router from '@ohos.router';
 import { Prompt } from '@kit.ArkUI';
-import {WorkOrderStatus,WorkOrderItem,ApiResponse} from "../../utils/ErrorSubmitType"
-import {errorSubmitService} from "../../utils/ErrorSubmitService"
-
+import { WorkOrderItem, ApiResponse, PageData } from "../../utils/ErrorSubmitType"
+import { errorSubmitService } from "../../utils/ErrorSubmitService"
 
 @Entry
 @Component
@@ -24,7 +24,7 @@ struct ErrorSubmit {
 
         Text('故障上报')
           .fontSize(25)
-          .fontColor('#0000000')
+          .fontColor('#000000')
 
         Text('地图')
           .fontColor('#007AFF')
@@ -81,10 +81,10 @@ struct ErrorSubmit {
 
       // 选项卡切换
       Swiper(this.swiper) {
-        daichuli()
-        chulihzong()
-        daipingjia()
-        yiwancheng()
+        Daichuli()
+        Chulihzong()
+        Daipingjia()
+        Yiwancheng()
       }
       .width("100%")
       .height("100%")
@@ -99,27 +99,50 @@ struct ErrorSubmit {
 }
 
 @Component
-struct daichuli {
+struct Daichuli {
   @State Refresh: boolean = false;
   @State Loading: boolean = false;
   @State workOrder: WorkOrderItem[] = []
+  @State currentPage: number = 1;
+  @State hasMore: boolean = true;
 
-  async fetchData() {
-    this.Loading = true
+  async fetchData(reset: boolean = false) {
+    if (reset) {
+      this.currentPage = 1;
+      this.hasMore = true;
+      this.Loading = true; // 重置时也要显示加载状态
+    }
+
+    if (!this.hasMore && !reset) {
+      return;
+    }
+
     try {
-      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/pending")
+      const result = await errorSubmitService<ApiResponse>(`http://26.195.0.245:8080/errorSubmit/pending?pageNum=${this.currentPage}`);
       if (result.code === 200) {
-        this.workOrder = result.data as WorkOrderItem[]
+        const pageData = result.data as PageData;
+
+        if (reset) {
+          this.workOrder = pageData.records;
+        } else {
+          this.workOrder = [...this.workOrder, ...pageData.records];
+        }
+
+        if (this.workOrder.length >= pageData.total) {
+          this.hasMore = false;
+        } else {
+          this.currentPage++;
+        }
       }
     } catch (error) {
-      console.error('获取数据失败:', error)
+      console.error('获取数据失败:', error);
     } finally {
-      this.Loading = false
+      this.Loading = false;
     }
   }
 
   aboutToAppear() {
-    this.fetchData()
+    this.fetchData(true);
   }
 
   @Builder
@@ -127,7 +150,7 @@ struct daichuli {
     Column({ space: 10 }) {
       Text(`${item.equipmentType} - ${item.equipmentCode}`)
         .fontSize(20)
-        .fontWeight(10)
+        .fontWeight(FontWeight.Normal)
         .width('100%')
 
       Text(`故障类型：${item.faultType}`)
@@ -163,15 +186,18 @@ struct daichuli {
     Column() {
       Refresh({ refreshing: this.Refresh, promptText: '正在加载中' }) {
         List() {
-          ForEach(this.workOrder, (item: WorkOrderItem) => {
+          ForEach(this.workOrder, (item: WorkOrderItem, index: number) => {
             ListItem() {
               this.myItemUI(item)
             }
+          }, (item: WorkOrderItem, index: number) => {
+            return item.id.toString(); // 提供唯一的key
           })
-          if (this.Loading) {
+
+          if (this.Loading && this.workOrder.length > 0) {
             ListItem() {
               Row() {
-                Text('松开加载更多')
+                Text('加载中...')
                 LoadingProgress().width(20).height(20)
               }
               .width("100%")
@@ -181,20 +207,18 @@ struct daichuli {
           }
         }
         .onScrollIndex((start: number, end: number) => {
-          if (end == this.workOrder.length - 1 && this.Loading == false) {
-            this.Loading = true
-            setTimeout(() => {
-              this.Loading = false
-            }, 2000)
+          if (end >= this.workOrder.length - 1 && !this.Loading && this.hasMore) {
+            this.Loading = true; // 先设置加载状态
+            this.fetchData(false); // 然后加载数据
           }
         })
       }
       .onRefreshing(() => {
-        this.Refresh = true
-        this.fetchData()
+        this.Refresh = true;
+        this.fetchData(true); // 刷新时重新加载第一页
         setTimeout(() => {
-          this.Refresh = false
-        }, 2000)
+          this.Refresh = false;
+        }, 2000);
       })
     }
     .backgroundColor('#f2f2f2')
@@ -204,22 +228,23 @@ struct daichuli {
 }
 
 @Component
-struct chulihzong {
+struct Chulihzong {
   @State workOrder: WorkOrderItem[] = []
 
   async fetchData() {
     try {
-      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/processing")
+      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/processing");
       if (result.code === 200) {
-        this.workOrder = result.data as WorkOrderItem[]
+        const pageData = result.data as PageData;
+        this.workOrder = pageData.records;
       }
     } catch (error) {
-      console.error('获取数据失败:', error)
+      console.error('获取数据失败:', error);
     }
   }
 
   aboutToAppear() {
-    this.fetchData()
+    this.fetchData();
   }
 
   @Builder
@@ -227,7 +252,7 @@ struct chulihzong {
     Column({ space: 10 }) {
       Text(`${item.equipmentType} - ${item.equipmentCode}`)
         .fontSize(20)
-        .fontWeight(10)
+        .fontWeight(FontWeight.Normal)
         .width('100%')
 
       Text(`故障类型：${item.faultType}`)
@@ -262,10 +287,12 @@ struct chulihzong {
   build() {
     Column() {
       List() {
-        ForEach(this.workOrder, (item: WorkOrderItem) => {
+        ForEach(this.workOrder, (item: WorkOrderItem, index: number) => {
           ListItem() {
             this.myItemUI(item)
           }
+        }, (item: WorkOrderItem, index: number) => {
+          return item.id.toString(); // 提供唯一的key
         })
       }
       .layoutWeight(1)
@@ -275,22 +302,23 @@ struct chulihzong {
 }
 
 @Component
-struct daipingjia {
+struct Daipingjia {
   @State workOrder: WorkOrderItem[] = []
 
   async fetchData() {
     try {
-      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/completed")
+      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/completed");
       if (result.code === 200) {
-        this.workOrder = result.data as WorkOrderItem[]
+        const pageData = result.data as PageData;
+        this.workOrder = pageData.records;
       }
     } catch (error) {
-      console.error('获取数据失败:', error)
+      console.error('获取数据失败:', error);
     }
   }
 
   aboutToAppear() {
-    this.fetchData()
+    this.fetchData();
   }
 
   @Builder
@@ -298,7 +326,7 @@ struct daipingjia {
     Column({ space: 10 }) {
       Text(`${item.equipmentType} - ${item.equipmentCode}`)
         .fontSize(20)
-        .fontWeight(10)
+        .fontWeight(FontWeight.Normal)
         .width('100%')
 
       Text(`故障类型：${item.faultType}`)
@@ -333,10 +361,12 @@ struct daipingjia {
   build() {
     Column() {
       List() {
-        ForEach(this.workOrder, (item: WorkOrderItem) => {
+        ForEach(this.workOrder, (item: WorkOrderItem, index: number) => {
           ListItem() {
             this.myItemUI(item)
           }
+        }, (item: WorkOrderItem, index: number) => {
+          return item.id.toString(); // 提供唯一的key
         })
       }
       .layoutWeight(1)
@@ -346,22 +376,23 @@ struct daipingjia {
 }
 
 @Component
-struct yiwancheng {
+struct Yiwancheng {
   @State workOrder: WorkOrderItem[] = []
 
   async fetchData() {
     try {
-      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/evaluated")
+      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/evaluated");
       if (result.code === 200) {
-        this.workOrder = result.data as WorkOrderItem[]
+        const pageData = result.data as PageData;
+        this.workOrder = pageData.records;
       }
     } catch (error) {
-      console.error('获取数据失败:', error)
+      console.error('获取数据失败:', error);
     }
   }
 
   aboutToAppear() {
-    this.fetchData()
+    this.fetchData();
   }
 
   @Builder
@@ -369,7 +400,7 @@ struct yiwancheng {
     Column({ space: 10 }) {
       Text(`${item.equipmentType} - ${item.equipmentCode}`)
         .fontSize(20)
-        .fontWeight(10)
+        .fontWeight(FontWeight.Normal)
         .width('100%')
 
       Text(`故障类型：${item.faultType}`)
@@ -404,10 +435,12 @@ struct yiwancheng {
   build() {
     Column() {
       List() {
-        ForEach(this.workOrder, (item: WorkOrderItem) => {
+        ForEach(this.workOrder, (item: WorkOrderItem, index: number) => {
           ListItem() {
             this.myItemUI(item)
           }
+        }, (item: WorkOrderItem, index: number) => {
+          return item.id.toString(); // 提供唯一的key
         })
       }
       .layoutWeight(1)
