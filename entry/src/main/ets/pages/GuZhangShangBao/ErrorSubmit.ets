@@ -3,7 +3,7 @@ import router from '@ohos.router';
 import { Prompt } from '@kit.ArkUI';
 import { WorkOrderItem, ApiResponse, PageData } from "../../utils/ErrorSubmitType"
 import { errorSubmitService } from "../../utils/ErrorSubmitService"
-
+import { getToken } from '../../utils/TokenUtils'
 @Entry
 @Component
 struct ErrorSubmit {
@@ -118,7 +118,8 @@ struct Daichuli {
     }
 
     try {
-      const result = await errorSubmitService<ApiResponse>(`http://26.195.0.245:8080/errorSubmit/pending?pageNum=${this.currentPage}`);
+      const context = getContext(this)
+      const result = await errorSubmitService<ApiResponse>(`http://26.195.0.245:8080/errorSubmit/pending?pageNum=${this.currentPage}`,context);
       if (result.code === 200) {
         const pageData = result.data as PageData;
 
@@ -233,7 +234,8 @@ struct Chulihzong {
 
   async fetchData() {
     try {
-      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/processing");
+      const context = getContext(this)
+      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/processing",context);
       if (result.code === 200) {
         const pageData = result.data as PageData;
         this.workOrder = pageData.records;
@@ -307,7 +309,8 @@ struct Daipingjia {
 
   async fetchData() {
     try {
-      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/completed");
+      const context = getContext(this)
+      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/completed",context);
       if (result.code === 200) {
         const pageData = result.data as PageData;
         this.workOrder = pageData.records;
@@ -381,7 +384,8 @@ struct Yiwancheng {
 
   async fetchData() {
     try {
-      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/evaluated");
+      const context = getContext()
+      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/evaluated",context);
       if (result.code === 200) {
         const pageData = result.data as PageData;
         this.workOrder = pageData.records;
