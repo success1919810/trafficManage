@@ -2,38 +2,9 @@ import router from '@ohos.router';
 import { url } from '@kit.ArkTS';
 import {DialogHelper} from '@pura/harmony-dialog'
 import text from '@ohos.graphics.text';
+import { getCurrentUser, getToken } from '../utils/TokenUtils';
 @Component
 export struct  My{
- /* @Builder
-  myDialog(){
-    Column(){
-      Text('是否清除缓存')
-        .fontColor(30)
-        .fontColor('#ffffff')
-
-      Row(){
-        Button('否')
-          .fontSize(30)
-          .width(156)
-          .fontColor('#FFFFFF')
-          .backgroundColor('#000000')
-          .borderColor('#ffffff')
-          .borderWidth(2)
-          .type(ButtonType.Normal)
-        Button('是')
-          .fontSize(30)
-          .width(156)
-          .fontColor('#ffffff')
-          .backgroundColor('#000000')
-          .type(ButtonType.Normal)
-          .borderWidth(2)
-          .borderColor('#ffffff')
-      }
-    }
-    .backgroundColor('#000000')
-
-  }*/
-
   build() {
     Column(){
       //个人中心
@@ -56,7 +27,7 @@ export struct  My{
           .height(100)
         Column({space:10}){
           Row({space:30}){
-            Text('温迪')
+            Text(getCurrentUser())
               .fontSize(35)
               .fontColor('#FFFFFF')
             Text('中队长')

@@ -60,7 +60,8 @@
       "pages/YiChangQingWu/YiChang",
       "pages/YiChangQingWu/YiChangFanKui",
       "pages/YiChangJingQin/abnormalCaseDetail1",
-      "pages/YiChangJingQin/abnormalCaseFeedBack"
+      "pages/YiChangJingQin/abnormalCaseFeedBack",
+      "pages/WoDeShangBao/AddWorkOrder"
     ]
   }
 }

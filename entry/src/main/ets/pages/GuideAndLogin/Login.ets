@@ -1,18 +1,22 @@
 import router from '@ohos.router';
 import { promptAction } from '@kit.ArkUI';
 import { postJsonLogin } from '../../utils/HttpLoginService';
-import { saveToken } from '../../utils/TokenUtils';
+import { saveUserInfo } from "../../utils/TokenUtils";
 
 // 定义接口类型
 interface LoginRequest {
   account: string;
   password: string;
 }
-
+interface LoginBack{
+  account: string;
+  password: string;
+  token:string
+}
 interface LoginResult {
   code: number;
   msg: string;
-  data: string;
+  data: LoginBack;
 }
 
 @Entry
@@ -47,8 +51,8 @@ struct Starter {
       const result = await postJsonLogin<LoginResult>('http://26.195.0.245:8080/login', requestData);
 
       if (result.code === 200) {
-        const context = getContext(this)
-        await saveToken(context,result.data)
+        const context = getContext(this);
+        await saveUserInfo(context, result.data.token, result.data.account);
         promptAction.showToast({ message: '登录成功' });
         router.replaceUrl({ url: 'pages/Index' });
       } else {

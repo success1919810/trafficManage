@@ -17,6 +17,7 @@
     "pages/JingQinRenWu/JingQingRenWu",
     "pages/YiChangJingQin/AbnormalCase",
     "pages/WoDeShangBao/MyReport",
+    "pages/WoDeShangBao/AddWorkOrder",
     "pages/XiaoXiGongGao/TongZhiGongGao",
     "pages/XiaoXiGongGao/XiTongXiaoXi",
     "pages/JingQinRenWu/JingQingChuZhi",
@@ -74,6 +75,7 @@
     "pages/YiChangQingWu/YiChang",
     "pages/YiChangQingWu/YiChangFanKui",
     "pages/YiChangJingQin/abnormalCaseDetail1",
-    "pages/YiChangJingQin/abnormalCaseFeedBack"
+    "pages/YiChangJingQin/abnormalCaseFeedBack",
+    "pages/WoDeShangBao/EditWorkOrder"
   ]
 }
