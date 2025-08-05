@@ -80,7 +80,7 @@ struct PersonalInformation {
           .height(50)
           .backgroundColor('#ffffff')
           .onClick(()=>{
-              router.pushUrl({url:'pages/Starter'})
+              router.pushUrl({url:'pages/GuideAndLogin/Login'})
           })
       }
       .margin({top:400})
