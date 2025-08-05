@@ -9,7 +9,7 @@ interface ForgetRequest {
 interface ForgetResult {
   code: number;
   msg: string;
-  data?: object;
+  data: string;
 }
 
 @Entry
@@ -18,7 +18,8 @@ struct forgetPassword {
   // 手机号码输入框绑定的变量
   @State phoneNumber: string = '';
   // 验证码输入框绑定的变量
-  @State verifyCode: string = '';
+  @State verifyCode:string='';
+  @State verifyCodeBack:string='';
   // 控制"发送验证码"按钮是否可点击
   @State canSendCode: boolean = true;
   // 倒计时秒数
@@ -55,9 +56,14 @@ struct forgetPassword {
       const result = await postJsonLogin<ForgetResult>('http://26.120.165.93:8080/login/forget', forgetRequest);
 
       if (result.code === 200) {
-        // 手机号存在，模拟发送验证码
-        promptAction.showToast({ message: '验证码已发送（模拟发送，请输入123456）' });
-        this.startCountDown();
+        setTimeout(() => {
+          // 延迟后显示验证码吐司
+          promptAction.showToast({
+            message: "验证码为：" + result.data
+          });
+          this.verifyCodeBack = result.data;
+          this.startCountDown();
+        }, 3000);
       } else {
         promptAction.showToast({ message: result.msg || '该手机号未注册' });
       }
@@ -85,8 +91,8 @@ struct forgetPassword {
     }
 
     // 模拟验证码验证（固定为123456）
-    if (this.verifyCode !== '123456') {
-      promptAction.showToast({ message: '验证码错误，请输入123456' });
+    if (this.verifyCode !== this.verifyCodeBack) {
+      promptAction.showToast({ message: '验证码错误,请确认验证码' });
       return;
     }
 

@@ -30,7 +30,15 @@ struct Register {
   @State password: string = '';
   @State phone:string='';
   @State isLoading: boolean = false; // 登录状态加载指示器
-
+  private isValidPhone(phone: string): boolean {
+    const phoneRegex = /^1[3-9]\d{9}$/;
+    return phoneRegex.test(phone);
+  }
+  private isValidPassword(password: string): boolean {
+    // 至少6位，包含字母和数字
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/;
+    return passwordRegex.test(password);
+  }
   build() {
         Column() {
           Swiper() {
@@ -111,9 +119,20 @@ struct Register {
       promptAction.showToast({ message: '请输入用户名' });
       return;
     }
-
+    if (!this.phone.trim()) {
+      promptAction.showToast({ message: '请输入手机号' });
+      return;
+    }
+    if (!this.isValidPhone(this.phone)) {
+      promptAction.showToast({ message: '请按照手机号正确格式输入' });
+      return;
+    }
     if (!this.password.trim()) {
       promptAction.showToast({ message: '请输入密码' });
+      return;
+    }
+    if (!this.isValidPassword(this.password)) {
+      promptAction.showToast({ message: '密码至少6位，需包含字母和数字' });
       return;
     }
 

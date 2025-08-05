@@ -66,6 +66,10 @@ struct PersonalInformation {
           .height(30)
           .padding({right:10})
       }
+      .onClick(() => {
+        //跳转页面
+        router.pushUrl({ url: 'pages/GuideAndLogin/SetNewPassword' })
+      })
       .width('100%')
       .margin({top:20})
       .justifyContent(FlexAlign.SpaceBetween)
@@ -80,7 +84,7 @@ struct PersonalInformation {
           .height(50)
           .backgroundColor('#ffffff')
           .onClick(()=>{
-              router.pushUrl({url:'pages/Starter'})
+              router.pushUrl({url:'pages/GuideAndLogin/Login'})
           })
       }
       .margin({top:400})

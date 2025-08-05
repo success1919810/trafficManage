@@ -1,6 +1,14 @@
 import router from '@ohos.router';
 import {WorkOrderItem,ApiResponse} from "../../utils/ErrorSubmitType"
+import {getCurrentUser} from  "../../utils/TokenUtils"
+import { promptAction} from '@kit.ArkUI';
+import { errorSubmitService} from "../../utils/ErrorSubmitService"
 
+interface ResponseData{
+  code:number
+  msg:string
+  data:object
+}
 @Entry
 @Component
 struct Gongdanxingxi {
@@ -10,6 +18,7 @@ struct Gongdanxingxi {
   topRectHeight: number = 0;
   @State
   orderData:WorkOrderItem={} as WorkOrderItem
+
   aboutToAppear() {
     const params = router.getParams() as Record<string, WorkOrderItem>;
     if (params && typeof params.orderData === 'object') {
@@ -103,7 +112,40 @@ struct Gongdanxingxi {
         .alignItems(HorizontalAlign.Start)
         .width('100%')
         .padding({ left: 20, right: 20, top: 15, bottom: 15 })
-
+        // 登录按钮
+        Button('工单承接')
+          .width('90%')
+          .height(50)
+          .borderRadius(10)
+          .margin({ top: 50 })
+          .onClick(() => {
+            try{
+              const context = getContext()
+              const currentUser = getCurrentUser();
+              const now = new Date();
+              const reportTime = now.getFullYear() + '-' +
+              String(now.getMonth() + 1).padStart(2, '0') + '-' +
+              String(now.getDate()).padStart(2, '0') + ' ' +
+              String(now.getHours()).padStart(2, '0') + ':' +
+              String(now.getMinutes()).padStart(2, '0') + ':' +
+              String(now.getSeconds()).padStart(2, '0');
+              if (!currentUser) {
+                promptAction.showToast({ message: '请先登录' });
+                return;
+              }
+              const result = await errorSubmitService<ResponseData>(
+                `http://26.120.165.93:8080/orders/status?taker=${encodeURIComponent(currentUser)}`,//url需要完善
+                context
+              );
+              if(result.code===200){
+                promptAction.showToast({message:"你已经成功接单，请注意"})
+              }
+            } catch (error) {
+              // 捕获异常
+            }
+          }
+          )
+          .shadow({ radius: 20, color: '#666666', offsetX: 15, offsetY: 15 })
       }
       .layoutWeight(1)
       .backgroundColor('#FFFFFF')

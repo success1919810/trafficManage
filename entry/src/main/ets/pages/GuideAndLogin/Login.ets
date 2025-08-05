@@ -27,6 +27,12 @@ struct Starter {
   @State password: string = '';
   @State isLoading: boolean = false;
 
+  private isValidPassword(password: string): boolean {
+    // 至少6位，包含字母和数字
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/;
+    return passwordRegex.test(password);
+  }
+
   // 登录请求方法
   async login(): Promise<void> {
 
@@ -37,6 +43,10 @@ struct Starter {
     }
     if (!this.password.trim()) {
       promptAction.showToast({ message: '请输入密码' });
+      return;
+    }
+    if (!this.isValidPassword(this.password)) {
+      promptAction.showToast({ message: '密码至少6位，需包含字母和数字' });
       return;
     }
 
