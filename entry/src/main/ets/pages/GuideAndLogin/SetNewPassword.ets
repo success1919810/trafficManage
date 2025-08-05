@@ -71,7 +71,7 @@ struct setNewPassword {
         password: this.confirmPassword
       };
 
-      const result = await postJsonLogin<setNewResult>('http://26.195.0.245:8080/login/setNew', setNewRequest);
+      const result = await postJsonLogin<setNewResult>('http://26.120.165.93:8080/login/setNew', setNewRequest);
 
       if (result.code === 200) {
         promptAction.showToast({ message: '密码重置成功，请重新登录' });

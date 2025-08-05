@@ -119,7 +119,7 @@ struct Daichuli {
 
     try {
       const context = getContext(this)
-      const result = await errorSubmitService<ApiResponse>(`http://26.195.0.245:8080/errorSubmit/pending?pageNum=${this.currentPage}`,context);
+      const result = await errorSubmitService<ApiResponse>(`http://26.120.165.93:8080/errorSubmit/pending?pageNum=${this.currentPage}`,context);
       if (result.code === 200) {
         const pageData = result.data as PageData;
 
@@ -235,7 +235,7 @@ struct Chulihzong {
   async fetchData() {
     try {
       const context = getContext(this)
-      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/processing",context);
+      const result = await errorSubmitService<ApiResponse>("http://26.120.165.93:8080/errorSubmit/processing",context);
       if (result.code === 200) {
         const pageData = result.data as PageData;
         this.workOrder = pageData.records;
@@ -310,7 +310,7 @@ struct Daipingjia {
   async fetchData() {
     try {
       const context = getContext(this)
-      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/completed",context);
+      const result = await errorSubmitService<ApiResponse>("http://26.120.165.93:8080/errorSubmit/completed",context);
       if (result.code === 200) {
         const pageData = result.data as PageData;
         this.workOrder = pageData.records;
@@ -385,7 +385,7 @@ struct Yiwancheng {
   async fetchData() {
     try {
       const context = getContext()
-      const result = await errorSubmitService<ApiResponse>("http://26.195.0.245:8080/errorSubmit/evaluated",context);
+      const result = await errorSubmitService<ApiResponse>("http://26.120.165.93:8080/errorSubmit/evaluated",context);
       if (result.code === 200) {
         const pageData = result.data as PageData;
         this.workOrder = pageData.records;

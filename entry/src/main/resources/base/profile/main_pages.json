@@ -76,6 +76,7 @@
     "pages/YiChangQingWu/YiChangFanKui",
     "pages/YiChangJingQin/abnormalCaseDetail1",
     "pages/YiChangJingQin/abnormalCaseFeedBack",
-    "pages/WoDeShangBao/EditWorkOrder"
+    "pages/WoDeShangBao/EditWorkOrder",
+    "pages/GuideAndLogin/Register"
   ]
 }

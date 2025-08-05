@@ -93,7 +93,7 @@ struct EditWorkOrder {
     try {
       const context = getContext(this);
       const result = await errorSubmitService<ApiResponse>(
-        `http://26.195.0.245:8080/errorSubmit/getDetails?id=${this.orderId}`,
+        `http://26.120.165.93:8080/errorSubmit/getDetails?id=${this.orderId}`,
         context
       );
 
@@ -198,7 +198,7 @@ struct EditWorkOrder {
       const token = await getToken(context);
 
       return new Promise<string | null>((resolve, reject) => {
-        httpRequest.request('http://26.195.0.245:8080/upload', {
+        httpRequest.request('http://26.120.165.93:8080/upload', {
           method: http.RequestMethod.POST,
           header: {
             'Authorization': `Bearer ${token}`,

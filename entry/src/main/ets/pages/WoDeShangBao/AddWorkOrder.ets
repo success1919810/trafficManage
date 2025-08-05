@@ -81,7 +81,7 @@ struct AddWorkOrder {
     try {
       const context = getContext(this);
       const result = await errorSubmitService<EquipmentApiResponse>(
-        `http://26.195.0.245:8080/equipment/${encodeURIComponent(this.equipmentCode)}`,
+        `http://26.120.165.93:8080/equipment/${encodeURIComponent(this.equipmentCode)}`,
         context
       );
 
@@ -189,7 +189,7 @@ struct AddWorkOrder {
       const token = await getToken(context);
 
       return new Promise<string | null>((resolve, reject) => {
-        httpRequest.request('http://26.195.0.245:8080/upload', {
+        httpRequest.request('http://26.120.165.93:8080/upload', {
           method: http.RequestMethod.POST,
           header: {
             'Authorization': `Bearer ${token}`,
@@ -312,7 +312,7 @@ struct AddWorkOrder {
       const httpRequest = http.createHttp();
       const token = await getToken(context);
 
-      const response = await httpRequest.request('http://26.195.0.245:8080/errorSubmit/addOrder', {
+      const response = await httpRequest.request('http://26.120.165.93:8080/errorSubmit/addOrder', {
         method: http.RequestMethod.POST,
         header: {
           'Content-Type': 'application/json',

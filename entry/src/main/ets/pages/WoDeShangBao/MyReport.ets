@@ -80,7 +80,7 @@ struct ReportListComponent {
         return;
       }
       // const httpRequest = http.createHttp()
-      // const response = await httpRequest.request(`http://26.195.0.245:8080/errorSubmit/getByName?reporterName=${encodeURIComponent(currentUser)}`,{
+      // const response = await httpRequest.request(`http://26.120.165.93:8080/errorSubmit/getByName?reporterName=${encodeURIComponent(currentUser)}`,{
       //   method:http.RequestMethod.GET,
       //   header:{
       //     "Content-Type":"application/json",
@@ -90,7 +90,7 @@ struct ReportListComponent {
       // })
       // const result = JSON.parse(response.result as string)as T;
       const result = await errorSubmitService<ReportApiResponse>(
-        `http://26.195.0.245:8080/errorSubmit/getByName?reporterName=${encodeURIComponent(currentUser)}`,
+        `http://26.120.165.93:8080/errorSubmit/getByName?reporterName=${encodeURIComponent(currentUser)}`,
         context
       );
 
@@ -131,7 +131,7 @@ struct ReportListComponent {
       const token = await getToken(context);
       const httpRequest = http.createHttp();
 
-      const response = await httpRequest.request(`http://26.195.0.245:8080/errorSubmit/deleteOrder/${orderId}`, {
+      const response = await httpRequest.request(`http://26.120.165.93:8080/errorSubmit/deleteOrder/${orderId}`, {
         method: http.RequestMethod.DELETE,
         header: {
           "Content-Type": "application/json",

@@ -48,7 +48,7 @@ struct Starter {
         password: this.password
       };
 
-      const result = await postJsonLogin<LoginResult>('http://26.195.0.245:8080/login', requestData);
+      const result = await postJsonLogin<LoginResult>('http://26.120.165.93:8080/login', requestData);
 
       if (result.code === 200) {
         const context = getContext(this);
@@ -60,6 +60,7 @@ struct Starter {
       }
     } catch (e) {
       promptAction.showToast({ message: '网络请求失败，请检查连接' });
+      promptAction.showToast(e)
     } finally {
       this.isLoading = false;
     }
@@ -121,14 +122,26 @@ struct Starter {
         this.login();
       })
       .shadow({ radius: 20, color: '#666666', offsetX: 15, offsetY: 15 })
+    Row(){
+     Text('忘记密码')
+    .fontColor('#0079FE')
+    .margin({ top: 25 })
+    .onClick(() => {
+      router.pushUrl({url:'pages/GuideAndLogin/ForgetPassword'});
 
-      Text('忘记密码')
-        .fontColor('#0079FE')
-        .margin({ top: 25 })
-        .width('90%')
-        .onClick(() => {
-          router.pushUrl({url:'pages/GuideAndLogin/ForgetPassword'});
-        })
+    })
+     Text('注册')
+    .fontColor('#0079FE')
+    .margin({ top: 25 })
+    .onClick(() => {
+      router.pushUrl({url:'pages/GuideAndLogin/Register'});
+
+    })
+
+}
+.justifyContent(FlexAlign.SpaceBetween)
+.width('90%')
+
     }
     .width('100%')
     .height('100%')
