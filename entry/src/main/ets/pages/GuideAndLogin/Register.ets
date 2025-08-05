@@ -4,23 +4,23 @@ import promptAction from '@ohos.promptAction';
 import { BusinessError } from '@ohos.base';
 
 // 后端登录接口地址
-const REGISTER_API_URL = 'http://26.69.45.4:3000/api/register';
+const REGISTER_API_URL = '26.120.165.93:8080/login/register';
 // 定义登录响应数据的类型接口
-interface UserInfo {
-  id: number;
-  username: string;
-  email: string;
-}
-
-interface LoginResponseData {
-  token: string;
-  userInfo: UserInfo;
-}
+// interface UserInfo {
+//   id: number;
+//   username: string;
+//
+// }
+//
+// interface LoginResponseData {
+//   token: string;
+//   userInfo: UserInfo;
+// }
 
 interface LoginResponse {
   code: number;
-  message: string;
-  data: LoginResponseData;
+  msg: string;
+  data: object;
 }
 @Entry
 @Component
@@ -28,6 +28,7 @@ struct Register {
   @State message: string = 'Hello World';
   @State username: string = '';
   @State password: string = '';
+  @State phone:string='';
   @State isLoading: boolean = false; // 登录状态加载指示器
 
   build() {
@@ -40,13 +41,22 @@ struct Register {
               .margin({top:30})
           }.margin({ top:10,bottom: 30 })
 
-          TextInput({ placeholder: '请输入账号或手机号' })
+          TextInput({ placeholder: '请输入账号' })
             .type(InputType.Normal)
             .margin({ bottom: 15 })
             .height('50')
             .width('90%')
             .onChange((value: string) => {
               this.username = value;
+            });
+
+          TextInput({ placeholder: '请输入手机号' })
+            .type(InputType.Normal)
+            .margin({ bottom: 15 })
+            .height('50')
+            .width('90%')
+            .onChange((value: string) => {
+              this.phone = value;
             });
 
           TextInput({ placeholder: '请输入密码' })
@@ -121,6 +131,7 @@ struct Register {
             'Content-Type': 'application/json'
           },
           extraData: {
+            phone:this.phone.trim(),
             username: this.username.trim(),
             password: this.password.trim()
           },
@@ -137,13 +148,11 @@ struct Register {
         if (result.code === 200) {
           // 注册成功
           promptAction.showToast({ message: '注册成功' });
-          // 保存token等信息（实际项目中应该存储）
-          console.log('注册成功，token: ' + result.data?.token);
           // 跳转到首页
           router.pushUrl({ url: 'pages/GuideAndLogin/Login' });
         } else {
           // 后端返回错误信息
-          promptAction.showToast({ message: result.message || '注册失败' });
+          promptAction.showToast({ message: result.msg || '注册失败' });
         }
       } else {
         // HTTP请求失败
